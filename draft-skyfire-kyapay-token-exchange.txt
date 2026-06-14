@@ -1,0 +1,210 @@
+
+
+
+
+Network Working Group                                         A. Agarwal
+Internet-Draft                                      Skyfire Systems Inc.
+Intended status: Standards Track                                M. Jones
+Expires: 16 December 2026                         Self-Issued Consulting
+                                                            14 June 2026
+
+
+                         KYAPay Token Exchange
+               draft-skyfire-kyapay-token-exchange-latest
+
+Abstract
+
+   This specification describes how KYAPay tokens can be exchanged for
+   OAuth access tokens using OAuth Token Exchange to dynamically grant
+   agents access to resources they need to accomplish their mission.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at https://skyfire-
+   xyz.github.io/kyapay-ietf-draft/draft-skyfire-kyapay-token-
+   exchange.html.  Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-skyfire-kyapay-token-
+   exchange/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/skyfire-xyz/draft-skyfire-kyapay-token-exchange.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 16 December 2026.
+
+Copyright Notice
+
+   Copyright (c) 2026 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+     1.1.  Use Cases for the KYAPay Token Exchange
+   2.  Conventions and Definitions
+     2.1.  Roles
+   3.  KYAPay Token Exchange
+     3.1.  Are we performing RFC 8693 Impersonation or Delegation?
+     3.2.  What token_type are we using for the KYAPay tokens?
+   4.  Security Considerations
+   5.  Privacy Considerations
+   6.  IANA Considerations
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
+   Document History
+   Authors' Addresses
+
+1.  Introduction
+
+   KYAPay tokens [I-D.skyfire-kyapayprofile] are used by agents to
+   identify themselves, the principal they are acting on behalf of,
+   their payment capabilities, their authorized scope of action or
+   mission, and their intended audience.  Agents may need access to
+   resources in order to accomplish their mission.  This specification
+   describes how an agent can use OAuth Token Exchange [RFC8693] to
+   obtain OAuth access tokens granting access to resources that it needs
+   to accomplish its mission.
+
+1.1.  Use Cases for the KYAPay Token Exchange
+
+   Enabling agents to create accounts and/or log in to accounts on
+   behalf of their human principals is a related design goal.  To
+   achieve this, systems can utilize a token exchange workflow
+   [RFC8693].  In this process, a Security Token Service (STS), Identity
+   Provider (IdP), or OAuth Authorization Server verifies incoming KYA
+   tokens and extracts claims associated with the human principal, such
+   as email addresses.  The authorization server then performs a token
+   exchange, swapping the KYA token for a standard OAuth Access Token,
+   which the agent subsequently uses to interact with the target
+   service.  Crucially, this architecture allows the service to know
+   that the agent is acting on behalf of the user, making it possible to
+   differentiate between direct, human-present sessions and human-
+   initiated, agentic sessions for authorization, auditing, and security
+   purposes.
+
+   Early production deployments of KYAPay tokens are described at
+   https://kyapay.org.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+2.1.  Roles
+
+   The roles defined in [I-D.skyfire-kyapayprofile] are incorporated
+   into this specification.
+
+3.  KYAPay Token Exchange
+
+   KEY QUESTIONS
+
+3.1.  Are we performing RFC 8693 Impersonation or Delegation?
+
+   If Impersonation, I assume that the KYAPay token is the subject_token
+   value.
+
+   If Delegation, there are both subject_token and actor_token values.
+   In this case, which token is the KYAPay token?  Would the party for
+   whom the token is being requested the agent identity?  Would the
+   KYAPay token be the Subject Token and contain a may_act claim?  (All
+   of this makes me think we're not using the Delegation Token Exchange
+   flow, but if we are, these questions all need to be answered.)
+
+3.2.  What token_type are we using for the KYAPay tokens?
+
+   Are we using token_type urn:ietf:params:oauth:token-type:jwt?  Or are
+   we defining a new token_type value such as
+   urn:ietf:params:oauth:token-type:kyapay?  I assume the former is
+   sufficient - especially since KYAPay tokens are already explicitly
+   typed using the "typ" header parameter.
+
+4.  Security Considerations
+
+   The security considerations defined in [I-D.skyfire-kyapayprofile]
+   and OAuth Token Exchange [RFC8693] apply to this specification.
+
+5.  Privacy Considerations
+
+   The privacy considerations defined in [I-D.skyfire-kyapayprofile] and
+   OAuth Token Exchange [RFC8693] apply to this specification.
+
+6.  IANA Considerations
+
+   This specification requires no actions by IANA.
+
+7.  References
+
+7.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8693]  Jones, M., Nadalin, A., Campbell, B., Ed., Bradley, J.,
+              and C. Mortimore, "OAuth 2.0 Token Exchange", RFC 8693,
+              DOI 10.17487/RFC8693, January 2020,
+              <https://www.rfc-editor.org/rfc/rfc8693>.
+
+7.2.  Informative References
+
+   [I-D.skyfire-kyapayprofile]
+              Agarwal, A. and M. B. Jones, "KYAPay Profile", Work in
+              Progress, Internet-Draft, draft-skyfire-kyapayprofile-01,
+              31 March 2026, <https://datatracker.ietf.org/doc/html/
+              draft-skyfire-kyapayprofile-01>.
+
+Document History
+
+   [[ to be removed by the RFC Editor before publication as an RFC ]]
+
+   -00
+
+   *  Initial draft.
+
+Authors' Addresses
+
+   Ankit Agarwal
+   Skyfire Systems Inc.
+   Email: ankit_agarwal@yahoo.com
+   URI:   https://skyfire.xyz
+
+
+   Michael B. Jones
+   Self-Issued Consulting
+   Email: michael_b_jones@hotmail.com
+   URI:   https://self-issued.info/
