@@ -1,3 +1,5 @@
+<!-- regenerate: on (set to off if you edit this file) -->
+
 # KYAPay Token Exchange
 
 This is the working area for the individual Internet-Draft, "KYAPay Token Exchange".
@@ -26,3 +28,4 @@ $ make
 
 Command line usage requires that you have the necessary software installed.  See
 [the instructions](https://github.com/martinthomson/i-d-template/blob/main/doc/SETUP.md).
+
