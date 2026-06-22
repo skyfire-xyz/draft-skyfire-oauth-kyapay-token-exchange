@@ -5,8 +5,8 @@
 Network Working Group                                         A. Agarwal
 Internet-Draft                                      Skyfire Systems Inc.
 Intended status: Standards Track                                M. Jones
-Expires: 16 December 2026                         Self-Issued Consulting
-                                                            14 June 2026
+Expires: 24 December 2026                         Self-Issued Consulting
+                                                            22 June 2026
 
 
                          KYAPay Token Exchange
@@ -23,10 +23,10 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at https://skyfire-
-   xyz.github.io/kyapay-ietf-draft/draft-skyfire-kyapay-token-
-   exchange.html.  Status information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-skyfire-kyapay-token-
-   exchange/.
+   xyz.github.io/draft-skyfire-kyapay-token-exchange/draft-skyfire-
+   kyapay-token-exchange.html.  Status information for this document may
+   be found at https://datatracker.ietf.org/doc/draft-skyfire-kyapay-
+   token-exchange/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/skyfire-xyz/draft-skyfire-kyapay-token-exchange.
@@ -46,7 +46,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 December 2026.
+   This Internet-Draft will expire on 24 December 2026.
 
 Copyright Notice
 
@@ -69,8 +69,6 @@ Table of Contents
    2.  Conventions and Definitions
      2.1.  Roles
    3.  KYAPay Token Exchange
-     3.1.  Are we performing RFC 8693 Impersonation or Delegation?
-     3.2.  What token_type are we using for the KYAPay tokens?
    4.  Security Considerations
    5.  Privacy Considerations
    6.  IANA Considerations
@@ -108,6 +106,10 @@ Table of Contents
    initiated, agentic sessions for authorization, auditing, and security
    purposes.
 
+   One example use case is to exchange a KYAPay token for an OAuth
+   access token for a Model Context Protocol [MCP] service when the
+   agent needs to use the MCP service to accomplish its goals.
+
    Early production deployments of KYAPay tokens are described at
    https://kyapay.org.
 
@@ -126,27 +128,22 @@ Table of Contents
 
 3.  KYAPay Token Exchange
 
-   KEY QUESTIONS
+   This specification defines the following token type identifier URN.
 
-3.1.  Are we performing RFC 8693 Impersonation or Delegation?
+   urn:ietf:params:oauth:token-type:kyapay:  Indicates that the token is
+      a KYAPay token, as defined in [I-D.skyfire-kyapayprofile].
 
-   If Impersonation, I assume that the KYAPay token is the subject_token
-   value.
+   This identfier is used as the value of the subject_token_type Token
+   Exchange [RFC8693] request parameter when the subject_token value is
+   a KYAPay token.
 
-   If Delegation, there are both subject_token and actor_token values.
-   In this case, which token is the KYAPay token?  Would the party for
-   whom the token is being requested the agent identity?  Would the
-   KYAPay token be the Subject Token and contain a may_act claim?  (All
-   of this makes me think we're not using the Delegation Token Exchange
-   flow, but if we are, these questions all need to be answered.)
-
-3.2.  What token_type are we using for the KYAPay tokens?
-
-   Are we using token_type urn:ietf:params:oauth:token-type:jwt?  Or are
-   we defining a new token_type value such as
-   urn:ietf:params:oauth:token-type:kyapay?  I assume the former is
-   sufficient - especially since KYAPay tokens are already explicitly
-   typed using the "typ" header parameter.
+   When when exchanging a KYAPay token for another token, the
+   actor_token and actor_token_type request parameters are not used
+   because the KYAPay token contains identifying information for both
+   the principal on whose behalf the request is being made (in the Human
+   Identity (hid) claim) and the agent that is authorized to act on
+   behalf on the principal (in the Agent Platform Identity (apd) claim
+   and/or in the Agent Identity (aid) claim).
 
 4.  Security Considerations
 
@@ -184,9 +181,13 @@ Table of Contents
 
    [I-D.skyfire-kyapayprofile]
               Agarwal, A. and M. B. Jones, "KYAPay Profile", Work in
-              Progress, Internet-Draft, draft-skyfire-kyapayprofile-01,
-              31 March 2026, <https://datatracker.ietf.org/doc/html/
-              draft-skyfire-kyapayprofile-01>.
+              Progress, Internet-Draft, draft-skyfire-kyapayprofile-02,
+              20 June 2026, <https://datatracker.ietf.org/doc/html/
+              draft-skyfire-kyapayprofile-02>.
+
+   [MCP]      "Model Context Protocol Specification", November 2025,
+              <https://modelcontextprotocol.io/
+              specification/2025-11-25>.
 
 Document History
 
