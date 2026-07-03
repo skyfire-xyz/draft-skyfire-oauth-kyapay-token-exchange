@@ -3,7 +3,7 @@ title: "KYAPay Token Exchange"
 #abbrev: ""
 category: std
 
-docname: draft-skyfire-kyapay-token-exchange-latest
+docname: draft-skyfire-oauth-kyapay-token-exchange-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 #number:
 date:
@@ -18,12 +18,12 @@ keyword:
  - payment
  - commerce
 venue:
-  github: "skyfire-xyz/draft-skyfire-kyapay-token-exchange"
+  github: "skyfire-xyz/draft-skyfire-oauth-kyapay-token-exchange"
 #  group: WG
 #  type: Working Group
 #  mail: WG@example.com
 #  arch: https://example.com/WG
-  latest: "https://skyfire-xyz.github.io/draft-skyfire-kyapay-token-exchange/draft-skyfire-kyapay-token-exchange.html"
+  latest: "https://skyfire-xyz.github.io/draft-skyfire-oauth-kyapay-token-exchange/draft-skyfire-oauth-kyapay-token-exchange.html"
 
 author:
 -
