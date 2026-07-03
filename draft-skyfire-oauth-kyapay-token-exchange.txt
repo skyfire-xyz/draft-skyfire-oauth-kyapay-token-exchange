@@ -5,12 +5,12 @@
 Network Working Group                                         A. Agarwal
 Internet-Draft                                      Skyfire Systems Inc.
 Intended status: Standards Track                                M. Jones
-Expires: 24 December 2026                         Self-Issued Consulting
-                                                            22 June 2026
+Expires: 4 January 2027                           Self-Issued Consulting
+                                                             3 July 2026
 
 
                          KYAPay Token Exchange
-               draft-skyfire-kyapay-token-exchange-latest
+            draft-skyfire-oauth-kyapay-token-exchange-latest
 
 Abstract
 
@@ -23,13 +23,14 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at https://skyfire-
-   xyz.github.io/draft-skyfire-kyapay-token-exchange/draft-skyfire-
-   kyapay-token-exchange.html.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-skyfire-kyapay-
-   token-exchange/.
+   xyz.github.io/draft-skyfire-oauth-kyapay-token-exchange/draft-
+   skyfire-oauth-kyapay-token-exchange.html.  Status information for
+   this document may be found at https://datatracker.ietf.org/doc/draft-
+   skyfire-oauth-kyapay-token-exchange/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/skyfire-xyz/draft-skyfire-kyapay-token-exchange.
+   https://github.com/skyfire-xyz/draft-skyfire-oauth-kyapay-token-
+   exchange.
 
 Status of This Memo
 
@@ -46,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 December 2026.
+   This Internet-Draft will expire on 4 January 2027.
 
 Copyright Notice
 
