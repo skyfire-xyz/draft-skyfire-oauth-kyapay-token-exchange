@@ -62,7 +62,7 @@ to accomplish their mission.
 
 # Introduction
 
-KYAPay tokens {{?I-D.skyfire-kyapayprofile}}
+KYAPay tokens {{?I-D.skyfire-oauth-kyapay-token}}
 are used by agents to identify themselves,
 the principal they are acting on behalf of,
 their payment capabilities,
@@ -102,7 +102,7 @@ Early production deployments of KYAPay tokens are described at https://kyapay.or
 
 ## Roles
 
-The roles defined in {{?I-D.skyfire-kyapayprofile}} are incorporated into this specification.
+The roles defined in {{?I-D.skyfire-oauth-kyapay-token}} are incorporated into this specification.
 
 
 # KYAPay Token Exchange
@@ -110,7 +110,7 @@ The roles defined in {{?I-D.skyfire-kyapayprofile}} are incorporated into this s
 This specification defines the following token type identifier URN.
 
 `urn:ietf:params:oauth:token-type:kyapay`:
-: Indicates that the token is a KYAPay token, as defined in {{?I-D.skyfire-kyapayprofile}}.
+: Indicates that the token is a KYAPay token, as defined in {{?I-D.skyfire-oauth-kyapay-token}}.
 
 This identfier is used as the value of the `subject_token_type`
 Token Exchange {{RFC8693}} request parameter when the `subject_token` value
@@ -128,13 +128,13 @@ in the Agent Identity (`aid`) claim).
 
 # Security Considerations
 
-The security considerations defined in {{?I-D.skyfire-kyapayprofile}}
+The security considerations defined in {{?I-D.skyfire-oauth-kyapay-token}}
 and OAuth Token Exchange {{RFC8693}} apply to this specification.
 
 
 # Privacy Considerations
 
-The privacy considerations defined in {{?I-D.skyfire-kyapayprofile}}
+The privacy considerations defined in {{?I-D.skyfire-oauth-kyapay-token}}
 and OAuth Token Exchange {{RFC8693}} apply to this specification.
 
 
