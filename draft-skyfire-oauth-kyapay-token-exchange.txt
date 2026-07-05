@@ -5,8 +5,8 @@
 Network Working Group                                         A. Agarwal
 Internet-Draft                                      Skyfire Systems Inc.
 Intended status: Standards Track                                M. Jones
-Expires: 4 January 2027                           Self-Issued Consulting
-                                                             3 July 2026
+Expires: 6 January 2027                           Self-Issued Consulting
+                                                             5 July 2026
 
 
                          KYAPay Token Exchange
@@ -47,7 +47,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 January 2027.
+   This Internet-Draft will expire on 6 January 2027.
 
 Copyright Notice
 
@@ -81,7 +81,7 @@ Table of Contents
 
 1.  Introduction
 
-   KYAPay tokens [I-D.skyfire-kyapayprofile] are used by agents to
+   KYAPay tokens [I-D.skyfire-oauth-kyapay-token] are used by agents to
    identify themselves, the principal they are acting on behalf of,
    their payment capabilities, their authorized scope of action or
    mission, and their intended audience.  Agents may need access to
@@ -124,15 +124,15 @@ Table of Contents
 
 2.1.  Roles
 
-   The roles defined in [I-D.skyfire-kyapayprofile] are incorporated
-   into this specification.
+   The roles defined in [I-D.skyfire-oauth-kyapay-token] are
+   incorporated into this specification.
 
 3.  KYAPay Token Exchange
 
    This specification defines the following token type identifier URN.
 
    urn:ietf:params:oauth:token-type:kyapay:  Indicates that the token is
-      a KYAPay token, as defined in [I-D.skyfire-kyapayprofile].
+      a KYAPay token, as defined in [I-D.skyfire-oauth-kyapay-token].
 
    This identfier is used as the value of the subject_token_type Token
    Exchange [RFC8693] request parameter when the subject_token value is
@@ -148,13 +148,15 @@ Table of Contents
 
 4.  Security Considerations
 
-   The security considerations defined in [I-D.skyfire-kyapayprofile]
-   and OAuth Token Exchange [RFC8693] apply to this specification.
+   The security considerations defined in
+   [I-D.skyfire-oauth-kyapay-token] and OAuth Token Exchange [RFC8693]
+   apply to this specification.
 
 5.  Privacy Considerations
 
-   The privacy considerations defined in [I-D.skyfire-kyapayprofile] and
-   OAuth Token Exchange [RFC8693] apply to this specification.
+   The privacy considerations defined in
+   [I-D.skyfire-oauth-kyapay-token] and OAuth Token Exchange [RFC8693]
+   apply to this specification.
 
 6.  IANA Considerations
 
@@ -180,11 +182,12 @@ Table of Contents
 
 7.2.  Informative References
 
-   [I-D.skyfire-kyapayprofile]
-              Agarwal, A. and M. B. Jones, "KYAPay Profile", Work in
-              Progress, Internet-Draft, draft-skyfire-kyapayprofile-02,
-              20 June 2026, <https://datatracker.ietf.org/doc/html/
-              draft-skyfire-kyapayprofile-02>.
+   [I-D.skyfire-oauth-kyapay-token]
+              Agarwal, A. and M. B. Jones, "KYAPay Token", Work in
+              Progress, Internet-Draft, draft-skyfire-oauth-kyapay-
+              token-00, 5 July 2026,
+              <https://datatracker.ietf.org/doc/html/draft-skyfire-
+              oauth-kyapay-token-00>.
 
    [MCP]      "Model Context Protocol Specification", November 2025,
               <https://modelcontextprotocol.io/
