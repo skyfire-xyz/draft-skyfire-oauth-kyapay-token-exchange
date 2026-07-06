@@ -9,8 +9,8 @@ submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 date:
 consensus: true
 v: 3
-# area: AREA
-# workgroup: TODO
+area: Security
+workgroup: Web Authorization Protocol
 keyword:
  - agent
  - identity
