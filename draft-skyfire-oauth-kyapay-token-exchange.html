@@ -9,7 +9,7 @@
 <meta content="Michael B. Jones" name="author">
 <meta content="
        This specification describes how KYAPay tokens can be exchanged for
-OAuth access tokens using OAuth Token Exchange
+OAuth access tokens
 to dynamically grant agents access to resources they need
 to accomplish their mission. 
     " name="description">
@@ -1056,7 +1056,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Agarwal &amp; Jones</td>
-<td class="center">Expires 6 January 2027</td>
+<td class="center">Expires 7 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg {
 <dd class="internet-draft">draft-skyfire-oauth-kyapay-token-exchange-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-05" class="published">5 July 2026</time>
+<time datetime="2026-07-06" class="published">6 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-06">6 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-01-07">7 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1092,7 +1092,7 @@ svg {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This specification describes how KYAPay tokens can be exchanged for
-OAuth access tokens using OAuth Token Exchange
+OAuth access tokens
 to dynamically grant agents access to resources they need
 to accomplish their mission.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
@@ -1126,7 +1126,7 @@ to accomplish their mission.<a href="#section-abstract-1" class="pilcrow">¶</a>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 7 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1173,6 +1173,11 @@ to accomplish their mission.<a href="#section-abstract-1" class="pilcrow">¶</a>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-kyapay-token-exchange" class="internal xref">KYAPay Token Exchange</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-kyapay-token-exchange-examp" class="internal xref">KYAPay Token Exchange Example</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1198,7 +1203,10 @@ to accomplish their mission.<a href="#section-abstract-1" class="pilcrow">¶</a>
             <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-document-history" class="internal xref">Document History</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-contributors" class="internal xref">Contributors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1216,8 +1224,8 @@ their payment capabilities,
 their authorized scope of action or mission,
 and their intended audience.
 Agents may need access to resources in order to accomplish their mission.
-This specification describes how an agent can use OAuth Token Exchange <span>[<a href="#RFC8693" class="cite xref">RFC8693</a>]</span>
-to obtain OAuth access tokens granting access to resources
+This specification describes how an agent can present a KYAPay token
+to obtain an OAuth access token granting access to a resource
 that it needs to accomplish its mission.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <div id="use-cases-for-the-kyapay-token-exchange">
 <section id="section-1.1">
@@ -1225,8 +1233,8 @@ that it needs to accomplish its mission.<a href="#section-1-1" class="pilcrow">�
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-use-cases-for-the-kyapay-to" class="section-name selfRef">Use Cases for the KYAPay Token Exchange</a>
         </h3>
 <p id="section-1.1-1">Enabling agents to create accounts and/or log in to accounts
-on behalf of their human principals is a related design goal.
-To achieve this, systems can utilize a token exchange workflow <span>[<a href="#RFC8693" class="cite xref">RFC8693</a>]</span>.
+on behalf of their human principals is a design goal.
+To achieve this, systems can utilize a token exchange workflow.
 In this process, a Security Token Service (STS), Identity Provider (IdP),
 or OAuth Authorization Server verifies incoming KYA tokens
 and extracts claims associated with the human principal, such as email addresses.
@@ -1270,26 +1278,115 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-kyapay-token-exchange">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-kyapay-token-exchange" class="section-name selfRef">KYAPay Token Exchange</a>
       </h2>
-<p id="section-3-1">This specification defines the following token type identifier URN.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-3-2">
-        <dt id="section-3-2.1">
-<code>urn:ietf:params:oauth:token-type:kyapay</code>:</dt>
-        <dd style="margin-left: 1.5em" id="section-3-2.2">
-          <p id="section-3-2.2.1">Indicates that the token is a KYAPay token, as defined in <span>[<a href="#I-D.skyfire-oauth-kyapay-token" class="cite xref">I-D.skyfire-oauth-kyapay-token</a>]</span>.<a href="#section-3-2.2.1" class="pilcrow">¶</a></p>
-</dd>
-      <dd class="break"></dd>
-</dl>
-<p id="section-3-3">This identfier is used as the value of the <code>subject_token_type</code>
-Token Exchange <span>[<a href="#RFC8693" class="cite xref">RFC8693</a>]</span> request parameter when the <code>subject_token</code> value
-is a KYAPay token.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">When when exchanging a KYAPay token for another token,
-the <code>actor_token</code> and <code>actor_token_type</code> request parameters are not used
-because the KYAPay token contains identifying information for both
+<p id="section-3-1">The KYAPay token contains identifying information for both
 the principal on whose behalf the request is being made
 (in the Human Identity (<code>hid</code>) claim) and
 the agent that is authorized to act on behalf on the principal
 (in the Agent Platform Identity (<code>apd</code>) claim and/or
-in the Agent Identity (<code>aid</code>) claim).<a href="#section-3-4" class="pilcrow">¶</a></p>
+in the Agent Identity (<code>aid</code>) claim).
+The token exchange is performed using the
+grant type <code>urn:ietf:params:oauth:grant-type:jwt-bearer</code> <span>[<a href="#RFC7523" class="cite xref">RFC7523</a>]</span>
+at the authorization server's token endpoint.
+The KYAPay token is supplied as the <code>assertion</code> value.
+The protected resource that access is being requested for
+is supplied as the <code>resource</code> value <span>[<a href="#RFC8707" class="cite xref">RFC8707</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">Note that OAuth Token Exchange <span>[<a href="#RFC8693" class="cite xref">RFC8693</a>]</span>,
+which has a separate <code>subject_token</code> and <code>actor_token</code> values,
+is not used, since the KYAPay token has all the information needed
+to describe both parties for delegated authorization.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<div id="kyapay-token-exchange-example">
+<section id="section-3.1">
+        <h3 id="name-kyapay-token-exchange-examp">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-kyapay-token-exchange-examp" class="section-name selfRef">KYAPay Token Exchange Example</a>
+        </h3>
+<p id="section-3.1-1">The following is a non-normative example of a POST request
+to perform a KYAPay token exchange for an access token:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.1-2">
+<pre>
+POST /token HTTP/1.1
+Host: as.example.com
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
+&amp;assertion=*KYAPay Token*
+&amp;resource=https://mcp.acme.example/
+</pre><a href="#section-3.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-3.1-3">An example decoded set of JWT Header Parameters for the KYAPay token is:<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.1-4">
+<pre>
+{
+  "alg": "ES256",
+  "kid": "BEDD-0",
+  "typ": "kya+jwt"
+}
+</pre><a href="#section-3.1-4" class="pilcrow">¶</a>
+</div>
+<p id="section-3.1-5">An example decoded JWT Claims Set for the KYAPay token is:<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.1-6">
+<pre>
+{
+  "env": "production",
+  "ori": "https://app.skyfire.xyz",
+  "itg": "cursor-agent",
+  "tsi": "886eef79-4d90-4b8d-81f0-ce5c6c7dac13",
+  "tdm": "auth101.dev",
+  "hid": {
+    "email": "example@skyfire.xyz",
+    "verifier": "https://app.skyfire.xyz",
+    "verified": true
+  },
+  "aid": {
+    "name": "Buyer 1",
+    "creation_ip": "12.50.206.98"
+  },
+  "apd": {
+    "id": "a283ced5-95be-4abe-81aa-51552e8876ad",
+    "name": "E2E Test Org 1",
+    "email": "example@skyfire.xyz",
+    "verifier": "https://app.skyfire.xyz",
+    "verified": true
+  },
+  "scope": "",
+  "iat": 1782245616,
+  "iss": "https://app.skyfire.xyz",
+  "jti": "019ef61d-eb8f-759b-9302-d998b294fcc9",
+  "aud": "886eef79-4d90-4b8d-81f0-ce5c6c7dac13",
+  "sub": "8fa1438f-8dd0-4e91-abb8-888cdbeb6d5d",
+  "exp": 1782245916
+}
+</pre><a href="#section-3.1-6" class="pilcrow">¶</a>
+</div>
+<p id="section-3.1-7">An example decoded set of JWT Header Parameters for the resulting access token is:<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.1-8">
+<pre>
+{
+  "alg": "ES256",
+  "kid": "BEDD-0",
+  "typ": "kya+jwt"
+}
+</pre><a href="#section-3.1-8" class="pilcrow">¶</a>
+</div>
+<p id="section-3.1-9">An example decoded JWT Claims Set for the resulting access token is:<a href="#section-3.1-9" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.1-10">
+<pre>
+{
+  "iss": "http://127.0.0.1:8788",
+  "aud": "http://127.0.0.1:8799/mcp",
+  "sub": "example@skyfire.xyz",
+  "scope": "openid profile email mcp",
+  "iat": 1782256825,
+  "exp": 1782260425,
+  "jti": "656ab7da-9c28-4dd4-a572-474af7ab47fe",
+  "client_metadata": {
+    "aid": "Buyer 1",
+    "ori": "https://app-qa.skyfire.xyz"
+  }
+}
+</pre><a href="#section-3.1-10" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
 </section>
 </div>
 <div id="security-considerations">
@@ -1298,7 +1395,7 @@ in the Agent Identity (<code>aid</code>) claim).<a href="#section-3-4" class="pi
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-4-1">The security considerations defined in <span>[<a href="#I-D.skyfire-oauth-kyapay-token" class="cite xref">I-D.skyfire-oauth-kyapay-token</a>]</span>
-and OAuth Token Exchange <span>[<a href="#RFC8693" class="cite xref">RFC8693</a>]</span> apply to this specification.<a href="#section-4-1" class="pilcrow">¶</a></p>
+and <span>[<a href="#RFC7523" class="cite xref">RFC7523</a>]</span> apply to this specification.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="privacy-considerations">
@@ -1307,7 +1404,7 @@ and OAuth Token Exchange <span>[<a href="#RFC8693" class="cite xref">RFC8693</a>
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-privacy-considerations" class="section-name selfRef">Privacy Considerations</a>
       </h2>
 <p id="section-5-1">The privacy considerations defined in <span>[<a href="#I-D.skyfire-oauth-kyapay-token" class="cite xref">I-D.skyfire-oauth-kyapay-token</a>]</span>
-and OAuth Token Exchange <span>[<a href="#RFC8693" class="cite xref">RFC8693</a>]</span> apply to this specification.<a href="#section-5-1" class="pilcrow">¶</a></p>
+and <span>[<a href="#RFC7523" class="cite xref">RFC7523</a>]</span> apply to this specification.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -1333,13 +1430,17 @@ and OAuth Token Exchange <span>[<a href="#RFC8693" class="cite xref">RFC8693</a>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC7523">[RFC7523]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Campbell, B.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants"</span>, <span class="seriesInfo">RFC 7523</span>, <span class="seriesInfo">DOI 10.17487/RFC7523</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7523">https://www.rfc-editor.org/rfc/rfc7523</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC8693">[RFC8693]</dt>
+<dt id="RFC8707">[RFC8707]</dt>
       <dd>
-<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Nadalin, A.</span>, <span class="refAuthor">Campbell, B., Ed.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"OAuth 2.0 Token Exchange"</span>, <span class="seriesInfo">RFC 8693</span>, <span class="seriesInfo">DOI 10.17487/RFC8693</span>, <time datetime="2020-01" class="refDate">January 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8693">https://www.rfc-editor.org/rfc/rfc8693</a>&gt;</span>. </dd>
+<span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"Resource Indicators for OAuth 2.0"</span>, <span class="seriesInfo">RFC 8707</span>, <span class="seriesInfo">DOI 10.17487/RFC8707</span>, <time datetime="2020-02" class="refDate">February 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8707">https://www.rfc-editor.org/rfc/rfc8707</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1355,8 +1456,12 @@ and OAuth Token Exchange <span>[<a href="#RFC8693" class="cite xref">RFC8693</a>
 <span class="refAuthor">Agarwal, A.</span> and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"KYAPay Token"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-skyfire-oauth-kyapay-token-00</span>, <time datetime="2026-07-05" class="refDate">5 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-skyfire-oauth-kyapay-token-00">https://datatracker.ietf.org/doc/html/draft-skyfire-oauth-kyapay-token-00</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="MCP">[MCP]</dt>
-      <dd>
+        <dd>
 <span class="refTitle">"Model Context Protocol Specification"</span>, <time datetime="2025-11" class="refDate">November 2025</time>, <span>&lt;<a href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8693">[RFC8693]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Nadalin, A.</span>, <span class="refAuthor">Campbell, B., Ed.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"OAuth 2.0 Token Exchange"</span>, <span class="seriesInfo">RFC 8693</span>, <span class="seriesInfo">DOI 10.17487/RFC8693</span>, <time datetime="2020-01" class="refDate">January 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8693">https://www.rfc-editor.org/rfc/rfc8693</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1377,8 +1482,19 @@ and OAuth Token Exchange <span>[<a href="#RFC8693" class="cite xref">RFC8693</a>
       </ul>
 </section>
 </div>
-<div id="authors-addresses">
+<div id="contributors">
 <section id="appendix-B">
+      <h2 id="name-contributors">
+<a href="#name-contributors" class="section-name selfRef">Contributors</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Ammar Safdari</span></div>
+<div dir="auto" class="left"><span class="org">Skyfire Systems Inc.</span></div>
+</address>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-C">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
