@@ -66,7 +66,7 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  Use Cases for the KYAPay Token Exchange
+     1.1.  Use Cases for KYAPay Token Exchange
    2.  Conventions and Definitions
      2.1.  Roles
    3.  KYAPay Token Exchange
@@ -92,7 +92,7 @@ Table of Contents
    access token granting access to a resource that it needs to
    accomplish its mission.
 
-1.1.  Use Cases for the KYAPay Token Exchange
+1.1.  Use Cases for KYAPay Token Exchange
 
    Enabling agents to create accounts and/or log in to accounts on
    behalf of their human principals is a design goal.  To achieve this,
