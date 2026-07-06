@@ -80,7 +80,7 @@ This specification describes how an agent can present a KYAPay token
 to obtain an OAuth access token granting access to a resource
 that it needs to accomplish its mission.
 
-## Use Cases for the KYAPay Token Exchange
+## Use Cases for KYAPay Token Exchange
 
 Enabling agents to create accounts and/or log in to accounts
 on behalf of their human principals is a design goal.
