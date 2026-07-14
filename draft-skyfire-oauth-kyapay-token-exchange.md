@@ -37,6 +37,10 @@ author:
   organization: Self-Issued Consulting
   email: michael_b_jones@hotmail.com
   uri: https://self-issued.info/
+-
+  name: Abhishek Hingnikar
+  organization: Okta
+  email: abhishek@hingnikar.com
 
 contributor:
 -
