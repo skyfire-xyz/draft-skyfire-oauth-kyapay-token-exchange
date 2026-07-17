@@ -41,6 +41,10 @@ author:
   name: Abhishek Hingnikar
   organization: Okta
   email: abhishek@hingnikar.com
+-
+  name: Jeffrey Hickman
+  organization: Ory
+  email: jhickman.it@gmail.com
 
 contributor:
 -
