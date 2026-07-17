@@ -5,10 +5,12 @@
 Web Authorization Protocol                                    A. Agarwal
 Internet-Draft                                      Skyfire Systems Inc.
 Intended status: Standards Track                                M. Jones
-Expires: 16 January 2027                          Self-Issued Consulting
+Expires: 18 January 2027                          Self-Issued Consulting
                                                             A. Hingnikar
                                                                     Okta
-                                                            15 July 2026
+                                                              J. Hickman
+                                                                     Ory
+                                                            17 July 2026
 
 
                          KYAPay Token Exchange
@@ -49,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 January 2027.
+   This Internet-Draft will expire on 18 January 2027.
 
 Copyright Notice
 
@@ -315,3 +317,8 @@ Authors' Addresses
    Abhishek Hingnikar
    Okta
    Email: abhishek@hingnikar.com
+
+
+   Jeffrey Hickman
+   Ory
+   Email: jhickman.it@gmail.com
