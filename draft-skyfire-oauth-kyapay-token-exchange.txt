@@ -5,12 +5,12 @@
 Web Authorization Protocol                                    A. Agarwal
 Internet-Draft                                      Skyfire Systems Inc.
 Intended status: Standards Track                                M. Jones
-Expires: 18 January 2027                          Self-Issued Consulting
+Expires: 20 January 2027                          Self-Issued Consulting
                                                             A. Hingnikar
                                                                     Okta
                                                               J. Hickman
                                                                      Ory
-                                                            17 July 2026
+                                                            19 July 2026
 
 
                          KYAPay Token Exchange
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 January 2027.
+   This Internet-Draft will expire on 20 January 2027.
 
 Copyright Notice
 
@@ -250,6 +250,13 @@ Table of Contents
 
 7.1.  Normative References
 
+   [I-D.skyfire-oauth-kyapay-token]
+              Agarwal, A. and M. B. Jones, "KYAPay Token", Work in
+              Progress, Internet-Draft, draft-skyfire-oauth-kyapay-
+              token-00, 5 July 2026,
+              <https://datatracker.ietf.org/doc/html/draft-skyfire-
+              oauth-kyapay-token-00>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -270,14 +277,8 @@ Table of Contents
 
 7.2.  Informative References
 
-   [I-D.skyfire-oauth-kyapay-token]
-              Agarwal, A. and M. B. Jones, "KYAPay Token", Work in
-              Progress, Internet-Draft, draft-skyfire-oauth-kyapay-
-              token-00, 5 July 2026,
-              <https://datatracker.ietf.org/doc/html/draft-skyfire-
-              oauth-kyapay-token-00>.
-
-   [MCP]      "Model Context Protocol Specification", November 2025,
+   [MCP]      Anthropic and the Model Context Protocol Contributors,
+              "Model Context Protocol Specification", November 2025,
               <https://modelcontextprotocol.io/
               specification/2025-11-25>.
 
