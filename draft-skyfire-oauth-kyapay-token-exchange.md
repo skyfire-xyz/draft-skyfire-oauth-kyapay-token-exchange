@@ -244,6 +244,10 @@ This specification requires no actions by IANA.
 
 [[ to be removed by the RFC Editor before publication as an RFC ]]
 
+-01
+
+* Added Abhishek Hingnikar and Jeffrey Hickman as authors.
+
 -00
 
 * Initial draft.
