@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-16T00:25:15.006772+00:00",
+  "timestamp": "2026-07-19T00:26:05.172438+00:00",
   "repo": "skyfire-xyz/draft-skyfire-oauth-kyapay-token-exchange",
   "labels": [
     {
@@ -89,6 +89,48 @@
           "body": "",
           "createdAt": "2026-07-15T15:40:20Z",
           "updatedAt": "2026-07-15T15:40:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOS5AS1M7ysAIf",
+      "title": "Add Jeff Hickman",
+      "url": "https://github.com/skyfire-xyz/draft-skyfire-oauth-kyapay-token-exchange/pull/2",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Cc: @jhickmanit",
+      "createdAt": "2026-07-16T20:03:41Z",
+      "updatedAt": "2026-07-17T02:28:48Z",
+      "baseRepository": "skyfire-xyz/draft-skyfire-oauth-kyapay-token-exchange",
+      "baseRefName": "main",
+      "baseRefOid": "2af6a4a8bbe85a64a9a09a8662f94feb3c770376",
+      "headRepository": "skyfire-xyz/draft-skyfire-oauth-kyapay-token-exchange",
+      "headRefName": "mbj-add-jeff",
+      "headRefOid": "526964d07aaef03dc83a5e9d58e2cfa8090516dd",
+      "closedAt": "2026-07-17T02:28:48Z",
+      "mergedAt": "2026-07-17T02:28:48Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "9ad684483735db4122b34202a87ae0826270ce22"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOS5AS1M8AAAABGTq7qg",
+          "commit": {
+            "abbreviatedOid": "526964d"
+          },
+          "author": "skyfire-ankit",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-07-16T22:55:41Z",
+          "updatedAt": "2026-07-16T22:55:41Z",
           "comments": []
         }
       ]
