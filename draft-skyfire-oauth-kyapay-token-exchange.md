@@ -56,6 +56,7 @@ contributor:
 normative:
   RFC7523:
   RFC8707:
+  I-D.skyfire-oauth-kyapay-token:
 
 informative:
   RFC8693:
@@ -63,6 +64,8 @@ informative:
     target: https://modelcontextprotocol.io/specification/2025-11-25
     title: Model Context Protocol Specification
     date: November 25, 2025
+    author:
+      - org: "Anthropic and the Model Context Protocol Contributors"
 
 ...
 
@@ -77,7 +80,7 @@ to accomplish their mission.
 
 # Introduction
 
-KYAPay tokens {{?I-D.skyfire-oauth-kyapay-token}}
+KYAPay tokens {{I-D.skyfire-oauth-kyapay-token}}
 are used by agents to identify themselves,
 the principal they are acting on behalf of,
 their payment capabilities,
@@ -117,7 +120,7 @@ Early production deployments of KYAPay tokens are described at https://kyapay.or
 
 ## Roles
 
-The roles defined in {{?I-D.skyfire-oauth-kyapay-token}} are incorporated into this specification.
+The roles defined in {{I-D.skyfire-oauth-kyapay-token}} are incorporated into this specification.
 
 
 # KYAPay Token Exchange
@@ -220,13 +223,13 @@ An example decoded JWT Claims Set for the resulting access token is:
 
 # Security Considerations
 
-The security considerations defined in {{?I-D.skyfire-oauth-kyapay-token}}
+The security considerations defined in {{I-D.skyfire-oauth-kyapay-token}}
 and {{RFC7523}} apply to this specification.
 
 
 # Privacy Considerations
 
-The privacy considerations defined in {{?I-D.skyfire-oauth-kyapay-token}}
+The privacy considerations defined in {{I-D.skyfire-oauth-kyapay-token}}
 and {{RFC7523}} apply to this specification.
 
 
