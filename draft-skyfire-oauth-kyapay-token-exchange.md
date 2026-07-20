@@ -154,6 +154,7 @@ to perform a KYAPay token exchange for an access token:
 
     grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
     &assertion=*KYAPay Token*
+	&client_assertion_type=urn:ietf:oauth:params:client_assertion_type:kyapay_token
     &resource=https://mcp.acme.example/
 
 An example decoded set of JWT Header Parameters for the KYAPay token is:
