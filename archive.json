@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-19T00:26:05.172438+00:00",
+  "timestamp": "2026-07-21T00:26:36.342718+00:00",
   "repo": "skyfire-xyz/draft-skyfire-oauth-kyapay-token-exchange",
   "labels": [
     {
@@ -49,7 +49,24 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 3,
+      "id": "I_kwDOS5AS1M8AAAABJZKzuQ",
+      "title": "How should this interop should an actor_token or subject_token be present?",
+      "url": "https://github.com/skyfire-xyz/draft-skyfire-oauth-kyapay-token-exchange/issues/3",
+      "state": "OPEN",
+      "author": "ciamshrek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "> Note that OAuth Token Exchange {{RFC8693}}, which has a separate subject_token and actor_token values, is not used, since the KYAPay token has all the information needed to describe both parties for delegated authorization.\n\nShould the AS reject these requests? It seems that it might be valuable to obtain a `subject_token` in some cases for instance if the user is already authenticated an KYAPay token is used for payments. ",
+      "createdAt": "2026-07-20T02:45:24Z",
+      "updatedAt": "2026-07-20T02:45:24Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
@@ -134,6 +151,40 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOS5AS1M7zqUwY",
+      "title": "Update draft-skyfire-oauth-kyapay-token-exchange.md",
+      "url": "https://github.com/skyfire-xyz/draft-skyfire-oauth-kyapay-token-exchange/pull/4",
+      "state": "OPEN",
+      "author": "ciamshrek",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "For the recipient AS it would be useful to have a specific `client_assertion_type` included in the request. Otherwise the AS would need to decode the token and then try to determine how to validate it, which may complicate implementation a bit. ",
+      "createdAt": "2026-07-20T02:53:57Z",
+      "updatedAt": "2026-07-20T20:00:22Z",
+      "baseRepository": "skyfire-xyz/draft-skyfire-oauth-kyapay-token-exchange",
+      "baseRefName": "main",
+      "baseRefOid": "287dab12b841040e8107dda4969abb4987bd73be",
+      "headRepository": "skyfire-xyz/draft-skyfire-oauth-kyapay-token-exchange",
+      "headRefName": "client_assertion_type",
+      "headRefOid": "3014d5871858db465d665e47ca6eccd60805668e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ciamshrek",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think this might require a registry bump too, cc: @skyfire-ankit to declare `client_assertion_type` in the registry. ",
+          "createdAt": "2026-07-20T20:00:22Z",
+          "updatedAt": "2026-07-20T20:00:22Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
