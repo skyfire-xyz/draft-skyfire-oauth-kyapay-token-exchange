@@ -5,12 +5,12 @@
 Web Authorization Protocol                                    A. Agarwal
 Internet-Draft                                      Skyfire Systems Inc.
 Intended status: Standards Track                                M. Jones
-Expires: 20 January 2027                          Self-Issued Consulting
+Expires: 30 March 2027                            Self-Issued Consulting
                                                             A. Hingnikar
                                                                     Okta
                                                               J. Hickman
                                                                      Ory
-                                                            19 July 2026
+                                                       26 September 2026
 
 
                          KYAPay Token Exchange
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 January 2027.
+   This Internet-Draft will expire on 30 March 2027.
 
 Copyright Notice
 
@@ -155,13 +155,14 @@ Table of Contents
    The following is a non-normative example of a POST request to perform
    a KYAPay token exchange for an access token:
 
-   POST /token HTTP/1.1
-   Host: as.example.com
-   Content-Type: application/x-www-form-urlencoded
+POST /token HTTP/1.1
+Host: as.example.com
+Content-Type: application/x-www-form-urlencoded
 
-   grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
-   &assertion=*KYAPay Token*
-   &resource=https://mcp.acme.example/
+grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
+&assertion=*KYAPay Token*
+    &client_assertion_type=urn:ietf:oauth:params:client_assertion_type:kyapay_token
+&resource=https://mcp.acme.example/
 
    An example decoded set of JWT Header Parameters for the KYAPay token
    is:
@@ -253,9 +254,9 @@ Table of Contents
    [I-D.skyfire-oauth-kyapay-token]
               Agarwal, A. and M. B. Jones, "KYAPay Token", Work in
               Progress, Internet-Draft, draft-skyfire-oauth-kyapay-
-              token-00, 5 July 2026,
+              token-01, 19 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-skyfire-
-              oauth-kyapay-token-00>.
+              oauth-kyapay-token-01>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
