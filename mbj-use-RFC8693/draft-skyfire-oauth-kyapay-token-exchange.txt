@@ -282,7 +282,7 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
    [I-D.ietf-oauth-client-id-metadata-document] (Client Authentication),
    clients that are capable of maintaining private key material and
    performing client authentication SHOULD do so with an acceptable
-   method, such as the private_key_jwt [OpenID.Core] client
+   method, such as the private_key_jwt [OpenID.Core] [RFC7523] client
    authentication method.  Otherwise, the "none" client authentication
    method [RFC7591] is used, and the client_id parameter is the CIMD
    URL.
@@ -467,11 +467,6 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
-   [RFC7523]  Jones, M., Campbell, B., and C. Mortimore, "JSON Web Token
-              (JWT) Profile for OAuth 2.0 Client Authentication and
-              Authorization Grants", RFC 7523, DOI 10.17487/RFC7523, May
-              2015, <https://www.rfc-editor.org/rfc/rfc7523>.
-
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
@@ -536,6 +531,11 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
    [RFC6755]  Campbell, B. and H. Tschofenig, "An IETF URN Sub-Namespace
               for OAuth", RFC 6755, DOI 10.17487/RFC6755, October 2012,
               <https://www.rfc-editor.org/rfc/rfc6755>.
+
+   [RFC7523]  Jones, M., Campbell, B., and C. Mortimore, "JSON Web Token
+              (JWT) Profile for OAuth 2.0 Client Authentication and
+              Authorization Grants", RFC 7523, DOI 10.17487/RFC7523, May
+              2015, <https://www.rfc-editor.org/rfc/rfc7523>.
 
    [RFC7591]  Richer, J., Ed., Jones, M., Bradley, J., Machulak, M., and
               P. Hunt, "OAuth 2.0 Dynamic Client Registration Protocol",
