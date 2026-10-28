@@ -272,6 +272,7 @@ The token exchange uses {{RFC8693}} and is performed as follows:
 * The "none" client authentication method {{RFC7591}} is used.
 * An HTTP POST is made to the authorization server's token endpoint.
 * The `grant_type` value is `urn:ietf:params:oauth:grant-type:token-exchange`.
+* The `client_id` value is the Client ID constructed as described above.
 * The `subject_token` value is the KYAPay token being exchanged.
 * The `subject_token_type` value is `urn:ietf:params:oauth:token-type:kyapay`.
 * The `resource` value is the URL of the protected resource
