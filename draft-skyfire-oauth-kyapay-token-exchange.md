@@ -307,7 +307,8 @@ As described in {{Section 8.2 of I-D.ietf-oauth-client-id-metadata-document}}
 clients that are capable of maintaining private key material and
 performing client authentication SHOULD do so with an acceptable
 method, such as the private_key_jwt {{OpenID.Core}} client authentication method.
-Otherwise, the "none" client authentication method {{RFC7591}} is used.
+Otherwise, the "none" client authentication method {{RFC7591}} is used,
+and the `client_id` parameter is the CIMD URL.
 
 The token exchange uses {{RFC8693}} and is performed as follows:
 
