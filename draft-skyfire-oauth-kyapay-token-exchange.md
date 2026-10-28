@@ -381,7 +381,7 @@ A client can declare support for KYAPay token exchange by including the value
 `urn:ietf:params:oauth:grant-profile:kyapay`
 in its `authorization_grant_profiles_supported` client metadata parameter
 {{I-D.ietf-oauth-identity-assertion-authz-grant}},
-for example in its Client ID Metadata Document.
+for example, in its Client ID Metadata Document.
 A client that includes this value MUST also include
 `urn:ietf:params:oauth:grant-type:token-exchange` in its `grant_types`.
 
