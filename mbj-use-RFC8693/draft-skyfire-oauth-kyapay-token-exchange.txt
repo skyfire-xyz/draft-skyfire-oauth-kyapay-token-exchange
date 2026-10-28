@@ -393,7 +393,7 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
 8.  Security Considerations
 
    The security considerations defined in
-   [I-D.skyfire-oauth-kyapay-token] and [RFC7523] apply to this
+   [I-D.skyfire-oauth-kyapay-token] and [RFC8693] apply to this
    specification.
 
 9.  Privacy Considerations
