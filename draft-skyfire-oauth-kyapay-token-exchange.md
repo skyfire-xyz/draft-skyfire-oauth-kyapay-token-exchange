@@ -410,7 +410,7 @@ The KYAPay token is used as the `subject_token` value for the token exchange.
 # Security Considerations
 
 The security considerations defined in {{I-D.skyfire-oauth-kyapay-token}}
-and {{RFC7523}} apply to this specification.
+and {{RFC8693}} apply to this specification.
 
 
 # Privacy Considerations
