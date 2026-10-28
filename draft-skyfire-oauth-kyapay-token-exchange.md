@@ -416,7 +416,7 @@ and {{RFC8693}} apply to this specification.
 # Privacy Considerations
 
 The privacy considerations defined in {{I-D.skyfire-oauth-kyapay-token}}
-and {{RFC7523}} apply to this specification.
+and {{RFC8693}} apply to this specification.
 
 The `kyapay_issuers_supported` value may disclose a set of
 KYAPay token issuers that the authorization server trusts.
