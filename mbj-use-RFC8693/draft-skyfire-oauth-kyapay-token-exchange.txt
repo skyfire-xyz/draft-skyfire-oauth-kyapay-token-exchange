@@ -151,8 +151,8 @@ Table of Contents
    This specification defines two methods of exchanging KYAPay tokens
    for access tokens: a direct method and a method using a Client ID
    Metadata Document (CIMD)
-   [I-D.ietf-oauth-client-id-metadata-document].  It also defines OAuth
-   metadata values enabling OAuth protected resources and authorization
+   [I-D.ietf-oauth-client-id-metadata-document].  It also defines an
+   OAuth authorization server metadata parameter enabling authorization
    servers to declare that KYAPay Token Exchange is supported.
 
    The steps when successfully exchanging a KYAPay token for an access
