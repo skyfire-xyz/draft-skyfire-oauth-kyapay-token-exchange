@@ -211,6 +211,10 @@ Table of Contents
    string literal "|", - the apd claim's id value, - the string literal
    "|", and - the aid claim's id value.
 
+   If the KYAPay token has no ori claim, or no apd claim, the
+   corresponding part is the empty string, so the Client ID always has
+   four parts separated by "|".
+
    An example such Client ID value is:
 
 kyapay:https://app.skyfire.xyz|https://app.skyfire.xyz|a283ced5-95be-4abe-81aa-51552e8876ad|7d889702-7b6a-46cb-9bdd-10e83d17b18d
