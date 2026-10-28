@@ -470,6 +470,9 @@ established by {{RFC8414}}.
 * Reworked to use OAuth 2.0 Token Exchange {{RFC8693}}.
   Both direct exchange of a KYAPay token for an access token
   and token exchange for a client using CIMD are defined.
+* Defined the `kyapay_issuers_supported` authorization server metadata parameter.
+* Registered the `urn:ietf:params:oauth:token-type:kyapay` token type
+  and the `kyapay_issuers_supported` metadata parameter.
 
 -01
 
