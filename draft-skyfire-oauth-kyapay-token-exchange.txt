@@ -7,7 +7,7 @@ Internet-Draft                                      Skyfire Systems Inc.
 Intended status: Standards Track                                M. Jones
 Expires: 1 May 2027                               Self-Issued Consulting
                                                             A. Hingnikar
-                                                                    Okta
+                                                                  WorkOS
                                                               J. Hickman
                                                                      Ory
                                                          28 October 2026
@@ -592,7 +592,7 @@ Authors' Addresses
 
 
    Abhishek Hingnikar
-   Okta
+   WorkOS
    Email: abhishek@hingnikar.com
 
 
