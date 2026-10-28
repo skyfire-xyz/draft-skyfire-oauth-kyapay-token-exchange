@@ -1,0 +1,654 @@
+
+
+
+
+Web Authorization Protocol                                    A. Agarwal
+Internet-Draft                                      Skyfire Systems Inc.
+Intended status: Standards Track                                M. Jones
+Expires: 1 May 2027                               Self-Issued Consulting
+                                                            A. Hingnikar
+                                                                    Okta
+                                                              J. Hickman
+                                                                     Ory
+                                                         28 October 2026
+
+
+                         KYAPay Token Exchange
+            draft-skyfire-oauth-kyapay-token-exchange-latest
+
+Abstract
+
+   This specification describes how KYAPay tokens can be exchanged for
+   OAuth access tokens to dynamically grant agents access to resources
+   they need to accomplish their mission.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at https://skyfire-
+   xyz.github.io/draft-skyfire-oauth-kyapay-token-exchange/draft-
+   skyfire-oauth-kyapay-token-exchange.html.  Status information for
+   this document may be found at https://datatracker.ietf.org/doc/draft-
+   skyfire-oauth-kyapay-token-exchange/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/skyfire-xyz/draft-skyfire-oauth-kyapay-token-
+   exchange.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 1 May 2027.
+
+Copyright Notice
+
+   Copyright (c) 2026 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
+
+Table of Contents
+
+   1.  Introduction
+     1.1.  Use Cases for KYAPay Token Exchange
+   2.  Conventions and Definitions
+     2.1.  Roles
+   3.  KYAPay Token Exchange
+   4.  Direct KYAPay Token Exchange Method
+   5.  KYAPay Token Exchange Method using Client ID Metadata Document
+           (CIMD)
+   6.  Authorization Server Metadata
+   7.  Client Metadata
+   8.  KYAPay Token Example
+   9.  Security Considerations
+   10. Privacy Considerations
+   11. IANA Considerations
+     11.1.  OAuth URI Registration
+       11.1.1.  urn:ietf:params:oauth:token-type:kyapay
+       11.1.2.  urn:ietf:params:oauth:grant-profile:kyapay
+     11.2.  OAuth Authorization Server Metadata Registration
+       11.2.1.  kyapay_issuers_supported
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
+   Document History
+   Contributors
+   Authors' Addresses
+
+1.  Introduction
+
+   KYAPay tokens [I-D.skyfire-oauth-kyapay-token] are used by agents to
+   identify themselves, the principal they are acting on behalf of,
+   their payment capabilities, their authorized scope of action or
+   mission, and their intended audience.  Agents may need access to
+   resources to accomplish their mission.  This specification describes
+   how an agent can present a KYAPay token to obtain an OAuth access
+   token granting access to a resource that it needs to accomplish its
+   mission.
+
+1.1.  Use Cases for KYAPay Token Exchange
+
+   Enabling agents to create accounts and/or log in to accounts on
+   behalf of their human principals is a design goal.  To achieve this,
+   systems can utilize a token exchange workflow.  In this process, a
+   Security Token Service (STS), Identity Provider (IdP), or OAuth
+   Authorization Server verifies incoming KYA tokens and extracts claims
+   associated with the human principal, such as email addresses.  The
+   authorization server then performs a token exchange, swapping the KYA
+   token for a standard OAuth Access Token, which the agent subsequently
+   uses to interact with the target service.  Crucially, this
+   architecture allows the service to know that the agent is acting on
+   behalf of the user, making it possible to differentiate between
+   direct, human-present sessions and human-initiated, agentic sessions
+   for authorization, auditing, and security purposes.
+
+   One example use case is to exchange a KYAPay token for an OAuth
+   access token for a Model Context Protocol [MCP] service when the
+   agent needs to use the MCP service to accomplish its goals.
+
+   Early production deployments of KYAPay tokens are described at
+   https://kyapay.org.
+
+2.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+2.1.  Roles
+
+   The roles defined in [I-D.skyfire-oauth-kyapay-token] are
+   incorporated into this specification.
+
+3.  KYAPay Token Exchange
+
+   The KYAPay token contains identifying information for both the
+   principal on whose behalf the request is being made (in the Human
+   Identity (hid) claim) and the agent that is authorized to act on
+   behalf of the principal (in the Agent Platform Identity (apd) claim
+   and the Agent Identity (aid) claim).
+
+   This specification defines two methods of exchanging KYAPay tokens
+   for access tokens: a direct method and a method using a Client ID
+   Metadata Document (CIMD)
+   [I-D.ietf-oauth-client-id-metadata-document].  It also defines an
+   authorization grant profile identifier, which authorization servers
+   and clients use to declare that they support KYAPay Token Exchange,
+   and an optional authorization server metadata parameter listing
+   supported KYAPay token issuers.
+
+   The steps when successfully exchanging a KYAPay token for an access
+   token and using it with the protected resource are:
+
+   1.  The client retrieves the OAuth protected resource metadata
+       document [RFC9728].
+
+   2.  The client determines from the resource metadata what
+       authorization server(s) can be used for the token exchange.
+
+   3.  The client chooses an authorization server and retrieves its
+       metadata [RFC8414].
+
+   4.  The client determines from the authorization server metadata
+       whether the authorization server supports KYAPay Token Exchange,
+       per Section 6.  It also may be able to determine if the
+       authorization server accepts tokens from specific KYAPay token
+       issuers.
+
+   5.  The client makes a token exchange [RFC8693] request to the
+       authorization server, passing the KYAPay token as the
+       subject_token value, the subject_token_type value of
+       urn:ietf:params:oauth:token-type:kyapay, and passing the resource
+       identifier [RFC8707] as the "resource" value.
+
+   6.  The authorization server returns an access token for the resource
+       to the client using information from the KYAPay token to create
+       the access token.  Note that this may be a bearer access token
+       [RFC6750] or a DPoP-bound access token [RFC9449].  The access
+       token will contain or reference sufficient information for the
+       protected resource to be able to provision access for the client,
+       which may include dynamic account creation.
+
+   7.  The client uses the access token to make an HTTP resource request
+       to the resource.
+
+   8.  The resource responds to the resource request providing the
+       requested information.
+
+   Note that the ability to use information in the KYAPay token to
+   dynamically provision access to the resource by the agent is critical
+   to enable seamless agentic access to resources for the user.  This
+   obviates the need to pre-provision an account for the user at every
+   resource that their agent might access -- a process that would not
+   scale.
+
+4.  Direct KYAPay Token Exchange Method
+
+   The direct KYAPay Token Exchange method uses a Client Identifier that
+   is constructed directly from information in the KYA Token.  Its value
+   contains the token issuer, the token originator, the agent platform
+   identifier, and the agent identity identifier.  Specifically, it is
+   the string concatenation of - the string literal "kyapay:", - the iss
+   claim value, - the string literal "|", - the ori claim value, - the
+   string literal "|", - the apd claim's id value, - the string literal
+   "|", and - the aid claim's id value.
+
+   If the KYAPay token has no ori claim, or no apd claim, the
+   corresponding part is the empty string, so the Client ID always has
+   four parts separated by "|".
+
+   An example such Client ID value is:
+
+kyapay:https://app.skyfire.xyz|https://app.skyfire.xyz|a283ced5-95be-4abe-81aa-51552e8876ad|7d889702-7b6a-46cb-9bdd-10e83d17b18d
+
+   This requires the authorization server to recognize and accept these
+   Client IDs without client pre-registration (as described in Section 2
+   of [RFC6749]) or dynamic client registration [RFC7591].  There is
+   precedent for authorization servers using non-pre-registered clients
+   based on the syntax of their Client Identifiers; the Client ID
+   Metadata Document (CIMD) [I-D.ietf-oauth-client-id-metadata-document]
+   specification uses unregistered Client IDs, the OpenID Federation
+   [OpenID.Federation] specification uses unregistered Client IDs, and
+   the OpenID for Verifiable Presentations [OpenID4VP] specification
+   uses unregistered Client IDs.  The OpenID4VP specification also uses
+   Client ID prefixes, as this specification does.
+
+   The token exchange uses [RFC8693] and is performed as follows:
+
+   *  The "none" client authentication method [RFC7591] is used.
+
+   *  An HTTP POST is made to the authorization server's token endpoint.
+
+   *  The grant_type value is urn:ietf:params:oauth:grant-type:token-
+      exchange.
+
+   *  The client_id value is the Client ID constructed as described
+      above.
+
+   *  The subject_token value is the KYAPay token being exchanged.
+
+   *  The subject_token_type value is urn:ietf:params:oauth:token-
+      type:kyapay.
+
+   *  The resource value is the URL of the protected resource that the
+      resulting token is intended for.
+
+   *  The requested_token_type parameter MAY be included; if included,
+      its value is urn:ietf:params:oauth:token-type:access_token.
+
+   *  No actor_token or actor_token_type parameters are included.
+
+   The following is a non-normative example of a POST request to perform
+   a direct KYAPay token exchange for an access token:
+
+POST /token HTTP/1.1
+Host: as.example.com
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=urn:ietf:params:oauth:grant-type:token-exchange
+&client_id=kyapay:https://app.skyfire.xyz|https://app.skyfire.xyz|a283ced5-95be-4abe-81aa-51552e8876ad|7d889702-7b6a-46cb-9bdd-10e83d17b18d
+&subject_token=*KYAPay Token*
+&subject_token_type=urn:ietf:params:oauth:token-type:kyapay
+&resource=https://mcp.acme.example/
+&requested_token_type=urn:ietf:params:oauth:token-type:access_token
+
+5.  KYAPay Token Exchange Method using Client ID Metadata Document
+    (CIMD)
+
+   This section describes a KYAPay token exchange method using a Client
+   ID Metadata Document (CIMD)
+   [I-D.ietf-oauth-client-id-metadata-document].  This method uses the
+   CIMD URL as the Client ID.
+
+   As described in Section 8.2 of
+   [I-D.ietf-oauth-client-id-metadata-document] (Client Authentication),
+   clients that are capable of maintaining private key material and
+   performing client authentication SHOULD do so with an acceptable
+   method, such as the private_key_jwt [OpenID.Core] [RFC7523] client
+   authentication method.  Otherwise, the "none" client authentication
+   method [RFC7591] is used, and the client_id parameter is the CIMD
+   URL.
+
+   The token exchange uses [RFC8693] and is performed as follows:
+
+   *  An HTTP POST is made to the authorization server's token endpoint.
+
+   *  The grant_type value is urn:ietf:params:oauth:grant-type:token-
+      exchange.
+
+   *  The subject_token value is the KYAPay token being exchanged.
+
+   *  The subject_token_type value is urn:ietf:params:oauth:token-
+      type:kyapay.
+
+   *  The resource value is the URL of the protected resource that the
+      resulting token is intended for.
+
+   *  The requested_token_type parameter MAY be included; if included,
+      its value is urn:ietf:params:oauth:token-type:access_token.
+
+   *  No actor_token or actor_token_type parameters are included.
+
+   The following is a non-normative example of a POST request by a CIMD
+   client using the private_key_jwt client authentication method to
+   perform a KYAPay token exchange for an access token:
+
+POST /token HTTP/1.1
+Host: as.example.com
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=urn:ietf:params:oauth:grant-type:token-exchange
+&subject_token=*KYAPay Token*
+&subject_token_type=urn:ietf:params:oauth:token-type:kyapay
+&resource=https://mcp.acme.example/
+&requested_token_type=urn:ietf:params:oauth:token-type:access_token
+&client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+&client_assertion=*JWT whose iss and sub are the CIMD URL*
+
+6.  Authorization Server Metadata
+
+   An authorization server declares support for KYAPay token exchange by
+   including the value urn:ietf:params:oauth:grant-profile:kyapay in its
+   authorization_grant_profiles_supported metadata parameter
+   [I-D.ietf-oauth-identity-assertion-authz-grant].  An authorization
+   server that includes this value MUST also include
+   urn:ietf:params:oauth:grant-type:token-exchange in
+   grant_types_supported.
+
+   Including this value indicates only that the authorization server
+   implements the processing rules of this specification.  It does not
+   indicate that a token from any particular KYAPay token issuer will be
+   accepted.
+
+   An authorization server MAY also include the kyapay_issuers_supported
+   metadata parameter [RFC8414].  The definition of this parameter is:
+
+   kyapay_issuers_supported:
+      OPTIONAL.  JSON array containing a list of issuer identifiers of
+      KYAPay token issuers, as specified in
+      [I-D.skyfire-oauth-kyapay-token], that can be used with this
+      authorization server.  Authorization servers MAY choose not to
+      advertise some supported token issuers, even when this parameter
+      is used.  In some use cases, the set of token issuers will not be
+      enumerable.  The array MAY be empty.
+
+   An authorization server that includes kyapay_issuers_supported MUST
+   also include urn:ietf:params:oauth:grant-profile:kyapay in
+   authorization_grant_profiles_supported.
+
+7.  Client Metadata
+
+   A client can declare support for KYAPay token exchange by including
+   the value urn:ietf:params:oauth:grant-profile:kyapay in its
+   authorization_grant_profiles_supported client metadata parameter
+   [I-D.ietf-oauth-identity-assertion-authz-grant], for example in its
+   Client ID Metadata Document.  A client that includes this value MUST
+   also include urn:ietf:params:oauth:grant-type:token-exchange in its
+   grant_types.
+
+   Clients using the direct method have no client metadata, so this
+   applies only to clients that publish or register metadata.
+
+8.  KYAPay Token Example
+
+   An example decoded set of JWT Header Parameters for a KYAPay token
+   is:
+
+   {
+     "alg": "ES256",
+     "kid": "BEDD-0",
+     "typ": "kya+jwt"
+   }
+
+   An example decoded JWT Claims Set for a KYAPay token is:
+
+   {
+     "env": "production",
+     "ori": "https://app.skyfire.xyz",
+     "itg": "cursor-agent",
+     "tsi": "886eef79-4d90-4b8d-81f0-ce5c6c7dac13",
+     "tdm": "auth101.dev",
+     "hid": {
+       "email": "example@skyfire.xyz",
+       "verifier": "https://app.skyfire.xyz",
+       "verified": true
+     },
+     "aid": {
+       "id": "7d889702-7b6a-46cb-9bdd-10e83d17b18d",
+       "name": "Buyer 1",
+       "creation_ip": "12.50.206.98"
+     },
+     "apd": {
+       "id": "a283ced5-95be-4abe-81aa-51552e8876ad",
+       "name": "E2E Test Org 1",
+       "email": "example@skyfire.xyz",
+       "verifier": "https://app.skyfire.xyz",
+       "verified": true
+     },
+     "scope": "xyz pdq",
+     "iat": 1782245616,
+     "iss": "https://app.skyfire.xyz",
+     "jti": "019ef61d-eb8f-759b-9302-d998b294fcc9",
+     "aud": "886eef79-4d90-4b8d-81f0-ce5c6c7dac13",
+     "sub": "8fa1438f-8dd0-4e91-abb8-888cdbeb6d5d",
+     "exp": 1782245916
+   }
+
+   The KYAPay token is used as the subject_token value for the token
+   exchange.
+
+9.  Security Considerations
+
+   The security considerations defined in
+   [I-D.skyfire-oauth-kyapay-token] and [RFC8693] apply to this
+   specification.
+
+10.  Privacy Considerations
+
+   The privacy considerations defined in
+   [I-D.skyfire-oauth-kyapay-token] and [RFC8693] apply to this
+   specification.
+
+   The kyapay_issuers_supported value may disclose a set of KYAPay token
+   issuers that the authorization server trusts.  Clients may need to
+   know, before making a request, whether a KYAPay token they hold or
+   can obtain will be accepted.  Deployments that consider their issuer
+   relationships sensitive should take this into account before
+   publishing the list.  As in Section 9.4 of
+   [I-D.ietf-oauth-identity-assertion-authz-grant], issuer lists are not
+   conveyed in authorization_grant_profiles_supported.
+
+11.  IANA Considerations
+
+11.1.  OAuth URI Registration
+
+   This specification registers the following values in the IANA "OAuth
+   URI" registry [IANA.OAuth.Parameters] established by [RFC6755].
+
+11.1.1.  urn:ietf:params:oauth:token-type:kyapay
+
+   *  URN: urn:ietf:params:oauth:token-type:kyapay
+
+   *  Common Name: KYAPay Token Type
+
+   *  Change controller: IETF
+
+   *  Specification Document: Section 3 of this specification
+
+11.1.2.  urn:ietf:params:oauth:grant-profile:kyapay
+
+   *  URN: urn:ietf:params:oauth:grant-profile:kyapay
+
+   *  Common Name: Authorization grant profile identifier for KYAPay
+      Token Exchange
+
+   *  Change controller: IETF
+
+   *  Specification Document: Section 6 of this specification
+
+11.2.  OAuth Authorization Server Metadata Registration
+
+   This specification registers the following parameter in the IANA
+   "OAuth Authorization Server Metadata" registry
+   [IANA.OAuth.Parameters] established by [RFC8414].
+
+11.2.1.  kyapay_issuers_supported
+
+   *  Metadata Name: kyapay_issuers_supported
+
+   *  Metadata Description: JSON array containing a list of issuer
+      identifiers of KYAPay token issuers that can be used with this
+      authorization server
+
+   *  Change Controller: IETF
+
+   *  Specification Document(s): Section 6 of this specification
+
+12.  References
+
+12.1.  Normative References
+
+   [I-D.ietf-oauth-client-id-metadata-document]
+              Parecki, A. and E. Smith, "OAuth Client ID Metadata
+              Document", Work in Progress, Internet-Draft, draft-ietf-
+              oauth-client-id-metadata-document-02, 6 July 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
+              client-id-metadata-document-02>.
+
+   [I-D.ietf-oauth-identity-assertion-authz-grant]
+              Parecki, A., McGuinness, K., and B. Campbell, "Identity
+              Assertion JWT Authorization Grant", Work in Progress,
+              Internet-Draft, draft-ietf-oauth-identity-assertion-authz-
+              grant-04, 21 May 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
+              identity-assertion-authz-grant-04>.
+
+   [I-D.skyfire-oauth-kyapay-token]
+              Agarwal, A. and M. B. Jones, "KYAPay Token", Work in
+              Progress, Internet-Draft, draft-skyfire-oauth-kyapay-
+              token-02, 1 October 2026,
+              <https://datatracker.ietf.org/doc/html/draft-skyfire-
+              oauth-kyapay-token-02>.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8414]  Jones, M., Sakimura, N., and J. Bradley, "OAuth 2.0
+              Authorization Server Metadata", RFC 8414,
+              DOI 10.17487/RFC8414, June 2018,
+              <https://www.rfc-editor.org/rfc/rfc8414>.
+
+   [RFC8693]  Jones, M., Nadalin, A., Campbell, B., Ed., Bradley, J.,
+              and C. Mortimore, "OAuth 2.0 Token Exchange", RFC 8693,
+              DOI 10.17487/RFC8693, January 2020,
+              <https://www.rfc-editor.org/rfc/rfc8693>.
+
+   [RFC8707]  Campbell, B., Bradley, J., and H. Tschofenig, "Resource
+              Indicators for OAuth 2.0", RFC 8707, DOI 10.17487/RFC8707,
+              February 2020, <https://www.rfc-editor.org/rfc/rfc8707>.
+
+   [RFC9728]  Jones, M.B., Hunt, P., and A. Parecki, "OAuth 2.0
+              Protected Resource Metadata", RFC 9728,
+              DOI 10.17487/RFC9728, April 2025,
+              <https://www.rfc-editor.org/rfc/rfc9728>.
+
+12.2.  Informative References
+
+   [IANA.OAuth.Parameters]
+              IANA, "OAuth Parameters",
+              <http://www.iana.org/assignments/oauth-parameters>.
+
+   [MCP]      Anthropic and the Model Context Protocol Contributors,
+              "Model Context Protocol Specification", July 2026,
+              <https://modelcontextprotocol.io/
+              specification/2026-07-28>.
+
+   [OpenID4VP]
+              Terbu, O., Lodderstedt, T., Yasuda, K., Fett, D., and J.
+              Heenan, "OpenID for Verifiable Presentations", July 2025,
+              <https://openid.net/specs/openid-4-verifiable-
+              presentations-1_0.html>.
+
+   [OpenID.Core]
+              Sakimura, N., Bradley, J., Jones, M. B., Medeiros, B. de.,
+              and C. Mortimore, "OpenID Connect Core 1.0 incorporating
+              errata set 2", 15 December 2023,
+              <https://openid.net/specs/openid-connect-core-1_0.html>.
+
+   [OpenID.Federation]
+              Hedberg, R., Jones, M. B., Solberg, A. Å., Bradley, J.,
+              Marco, G. D., and V. Dzhuvinov, "OpenID Federation 1.0",
+              February 2026,
+              <https://openid.net/specs/openid-federation-1_0.html>.
+
+   [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
+              RFC 6749, DOI 10.17487/RFC6749, October 2012,
+              <https://www.rfc-editor.org/rfc/rfc6749>.
+
+   [RFC6750]  Jones, M. and D. Hardt, "The OAuth 2.0 Authorization
+              Framework: Bearer Token Usage", RFC 6750,
+              DOI 10.17487/RFC6750, October 2012,
+              <https://www.rfc-editor.org/rfc/rfc6750>.
+
+   [RFC6755]  Campbell, B. and H. Tschofenig, "An IETF URN Sub-Namespace
+              for OAuth", RFC 6755, DOI 10.17487/RFC6755, October 2012,
+              <https://www.rfc-editor.org/rfc/rfc6755>.
+
+   [RFC7523]  Jones, M., Campbell, B., and C. Mortimore, "JSON Web Token
+              (JWT) Profile for OAuth 2.0 Client Authentication and
+              Authorization Grants", RFC 7523, DOI 10.17487/RFC7523, May
+              2015, <https://www.rfc-editor.org/rfc/rfc7523>.
+
+   [RFC7591]  Richer, J., Ed., Jones, M., Bradley, J., Machulak, M., and
+              P. Hunt, "OAuth 2.0 Dynamic Client Registration Protocol",
+              RFC 7591, DOI 10.17487/RFC7591, July 2015,
+              <https://www.rfc-editor.org/rfc/rfc7591>.
+
+   [RFC9449]  Fett, D., Campbell, B., Bradley, J., Lodderstedt, T.,
+              Jones, M., and D. Waite, "OAuth 2.0 Demonstrating Proof of
+              Possession (DPoP)", RFC 9449, DOI 10.17487/RFC9449,
+              September 2023, <https://www.rfc-editor.org/rfc/rfc9449>.
+
+Document History
+
+   [[ to be removed by the RFC Editor before publication as an RFC ]]
+
+   -02
+
+   *  Reworked to use OAuth 2.0 Token Exchange [RFC8693].  Both direct
+      exchange of a KYAPay token for an access token and token exchange
+      for a client using CIMD are defined.
+
+   *  Defined the urn:ietf:params:oauth:grant-profile:kyapay
+      authorization grant profile for authorization server and client
+      metadata, and the optional kyapay_issuers_supported authorization
+      server metadata parameter.
+
+   *  Registered the urn:ietf:params:oauth:token-type:kyapay token type,
+      the urn:ietf:params:oauth:grant-profile:kyapay grant profile, and
+      the kyapay_issuers_supported metadata parameter.
+
+   -01
+
+   *  Added Abhishek Hingnikar and Jeffrey Hickman as authors.
+
+   -00
+
+   *  Initial draft.
+
+Contributors
+
+   Ammar Safdari
+   Skyfire Systems Inc.
+
+
+Authors' Addresses
+
+   Ankit Agarwal
+   Skyfire Systems Inc.
+   Email: ankit_agarwal@yahoo.com
+   URI:   https://skyfire.xyz
+
+
+   Michael B. Jones
+   Self-Issued Consulting
+   Email: michael_b_jones@hotmail.com
+   URI:   https://self-issued.info/
+
+
+   Abhishek Hingnikar
+   Okta
+   Email: abhishek@hingnikar.com
+
+
+   Jeffrey Hickman
+   Ory
+   Email: jhickman.it@gmail.com
