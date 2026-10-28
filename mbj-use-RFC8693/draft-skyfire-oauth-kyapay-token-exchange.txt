@@ -5,12 +5,12 @@
 Web Authorization Protocol                                    A. Agarwal
 Internet-Draft                                      Skyfire Systems Inc.
 Intended status: Standards Track                                M. Jones
-Expires: 30 April 2027                            Self-Issued Consulting
+Expires: 1 May 2027                               Self-Issued Consulting
                                                             A. Hingnikar
                                                                     Okta
                                                               J. Hickman
                                                                      Ory
-                                                         27 October 2026
+                                                         28 October 2026
 
 
                          KYAPay Token Exchange
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 30 April 2027.
+   This Internet-Draft will expire on 1 May 2027.
 
 Copyright Notice
 
@@ -148,12 +148,12 @@ Table of Contents
    behalf of the principal (in the Agent Platform Identity (apd) claim
    and the Agent Identity (aid) claim).
 
-   It defines two methods of exchanging KYAPay tokens for access tokens:
-   a direct method and a method using a Client ID Metadata Document
-   (CIMD) [I-D.ietf-oauth-client-id-metadata-document].  It also defines
-   OAuth metadata values enabling OAuth protected resources and
-   authorization servers to declare that KYAPay Token Exchange is
-   supported.
+   This specification defines two methods of exchanging KYAPay tokens
+   for access tokens: a direct method and a method using a Client ID
+   Metadata Document (CIMD)
+   [I-D.ietf-oauth-client-id-metadata-document].  It also defines OAuth
+   metadata values enabling OAuth protected resources and authorization
+   servers to declare that KYAPay Token Exchange is supported.
 
    The steps when successfully exchanging a KYAPay token for an access
    token and using it with the protected resource are:
