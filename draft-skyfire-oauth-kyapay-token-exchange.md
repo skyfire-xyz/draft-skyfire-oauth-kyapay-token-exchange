@@ -318,6 +318,8 @@ The token exchange uses {{RFC8693}} and is performed as follows:
 * The `subject_token_type` value is `urn:ietf:params:oauth:token-type:kyapay`.
 * The `resource` value is the URL of the protected resource
   that the resulting token is intended for.
+* The `requested_token_type` parameter MAY be included;
+  if included, its value is `urn:ietf:params:oauth:token-type:access_token`.
 * No `actor_token` or `actor_token_type` parameters are included.
 
 The following is a non-normative example of a POST request
