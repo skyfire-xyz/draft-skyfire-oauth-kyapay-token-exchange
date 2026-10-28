@@ -54,7 +54,6 @@ contributor:
 # see https://github.com/cabo/kramdown-rfc/wiki/Syntax2#authors-contributors
 
 normative:
-  RFC7523:
   RFC8414:
   RFC8693:
   RFC8707:
@@ -66,6 +65,7 @@ informative:
   RFC6749:
   RFC6750:
   RFC6755:
+  RFC7523:
   RFC7591:
   RFC9449:
   MCP:
@@ -306,7 +306,7 @@ As described in {{Section 8.2 of I-D.ietf-oauth-client-id-metadata-document}}
 (Client Authentication),
 clients that are capable of maintaining private key material and
 performing client authentication SHOULD do so with an acceptable
-method, such as the private_key_jwt {{OpenID.Core}} client authentication method.
+method, such as the private_key_jwt {{OpenID.Core}} {{RFC7523}} client authentication method.
 Otherwise, the "none" client authentication method {{RFC7591}} is used,
 and the `client_id` parameter is the CIMD URL.
 
