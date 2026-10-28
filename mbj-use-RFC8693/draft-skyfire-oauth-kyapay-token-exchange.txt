@@ -240,6 +240,9 @@ kyapay:https://app.skyfire.xyz|https://app.skyfire.xyz|a283ced5-95be-4abe-81aa-5
    *  The grant_type value is urn:ietf:params:oauth:grant-type:token-
       exchange.
 
+   *  The client_id value is the Client ID constructed as described
+      above.
+
    *  The subject_token value is the KYAPay token being exchanged.
 
    *  The subject_token_type value is urn:ietf:params:oauth:token-
