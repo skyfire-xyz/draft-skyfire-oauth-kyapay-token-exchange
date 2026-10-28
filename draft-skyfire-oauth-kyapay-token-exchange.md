@@ -186,7 +186,7 @@ the agent that is authorized to act on behalf of the principal
 (in the Agent Platform Identity (`apd`) claim and
 the Agent Identity (`aid`) claim).
 
-It defines two methods of exchanging KYAPay tokens for access tokens:
+This specification defines two methods of exchanging KYAPay tokens for access tokens:
 a direct method and
 a method using a
 Client ID Metadata Document (CIMD) {{I-D.ietf-oauth-client-id-metadata-document}}.
