@@ -1498,7 +1498,11 @@ and the <code>client_id</code> parameter is the CIMD URL.<a href="#section-5-2" 
 that the resulting token is intended for.<a href="#section-5-4.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-5-4.6">
-          <p id="section-5-4.6.1">No <code>actor_token</code> or <code>actor_token_type</code> parameters are included.<a href="#section-5-4.6.1" class="pilcrow">¶</a></p>
+          <p id="section-5-4.6.1">The <code>requested_token_type</code> parameter <span class="bcp14">MAY</span> be included;
+if included, its value is <code>urn:ietf:params:oauth:token-type:access_token</code>.<a href="#section-5-4.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-4.7">
+          <p id="section-5-4.7.1">No <code>actor_token</code> or <code>actor_token_type</code> parameters are included.<a href="#section-5-4.7.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-5-5">The following is a non-normative example of a POST request
