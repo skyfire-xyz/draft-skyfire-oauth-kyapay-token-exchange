@@ -284,7 +284,8 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
    performing client authentication SHOULD do so with an acceptable
    method, such as the private_key_jwt [OpenID.Core] client
    authentication method.  Otherwise, the "none" client authentication
-   method [RFC7591] is used.
+   method [RFC7591] is used, and the client_id parameter is the CIMD
+   URL.
 
    The token exchange uses [RFC8693] and is performed as follows:
 

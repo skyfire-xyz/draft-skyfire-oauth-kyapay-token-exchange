@@ -1477,7 +1477,8 @@ This method uses the CIMD URL as the Client ID.<a href="#section-5-1" class="pil
 clients that are capable of maintaining private key material and
 performing client authentication <span class="bcp14">SHOULD</span> do so with an acceptable
 method, such as the private_key_jwt <span>[<a href="#OpenID.Core" class="cite xref">OpenID.Core</a>]</span> client authentication method.
-Otherwise, the "none" client authentication method <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span> is used.<a href="#section-5-2" class="pilcrow">¶</a></p>
+Otherwise, the "none" client authentication method <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span> is used,
+and the <code>client_id</code> parameter is the CIMD URL.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">The token exchange uses <span>[<a href="#RFC8693" class="cite xref">RFC8693</a>]</span> and is performed as follows:<a href="#section-5-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5-4.1">
