@@ -39,7 +39,7 @@ author:
   uri: https://self-issued.info/
 -
   name: Abhishek Hingnikar
-  organization: Okta
+  organization: WorkOS
   email: abhishek@hingnikar.com
 -
   name: Jeffrey Hickman
