@@ -5,12 +5,12 @@
 Web Authorization Protocol                                    A. Agarwal
 Internet-Draft                                      Skyfire Systems Inc.
 Intended status: Standards Track                                M. Jones
-Expires: 1 May 2027                               Self-Issued Consulting
+Expires: 2 May 2027                               Self-Issued Consulting
                                                             A. Hingnikar
                                                                   WorkOS
                                                               J. Hickman
                                                                      Ory
-                                                         28 October 2026
+                                                         29 October 2026
 
 
                          KYAPay Token Exchange
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 May 2027.
+   This Internet-Draft will expire on 2 May 2027.
 
 Copyright Notice
 
@@ -78,17 +78,19 @@ Table of Contents
    5.  KYAPay Token Exchange Method using Client ID Metadata Document
            (CIMD)
    6.  Authorization Server Metadata
-   7.  KYAPay Token Example
-   8.  Security Considerations
-   9.  Privacy Considerations
-   10. IANA Considerations
-     10.1.  OAuth URI Registration
-       10.1.1.  urn:ietf:params:oauth:token-type:kyapay
-     10.2.  OAuth Authorization Server Metadata Registration
-       10.2.1.  kyapay_issuers_supported
-   11. References
-     11.1.  Normative References
-     11.2.  Informative References
+   7.  Client Metadata
+   8.  KYAPay Token Example
+   9.  Security Considerations
+   10. Privacy Considerations
+   11. IANA Considerations
+     11.1.  OAuth URI Registration
+       11.1.1.  urn:ietf:params:oauth:token-type:kyapay
+       11.1.2.  urn:ietf:params:oauth:grant-profile:kyapay
+     11.2.  OAuth Authorization Server Metadata Registration
+       11.2.1.  kyapay_issuers_supported
+   12. References
+     12.1.  Normative References
+     12.2.  Informative References
    Document History
    Contributors
    Authors' Addresses
@@ -152,8 +154,10 @@ Table of Contents
    for access tokens: a direct method and a method using a Client ID
    Metadata Document (CIMD)
    [I-D.ietf-oauth-client-id-metadata-document].  It also defines an
-   OAuth authorization server metadata parameter enabling authorization
-   servers to declare that KYAPay Token Exchange is supported.
+   authorization grant profile identifier, which authorization servers
+   and clients use to declare that they support KYAPay Token Exchange,
+   and an optional authorization server metadata parameter listing
+   supported KYAPay token issuers.
 
    The steps when successfully exchanging a KYAPay token for an access
    token and using it with the protected resource are:
@@ -326,8 +330,20 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
 6.  Authorization Server Metadata
 
    An authorization server declares support for KYAPay token exchange by
-   including a kyapay_issuers_supported authorization server metadata
-   parameter [RFC8414].  The definition of this parameter is:
+   including the value urn:ietf:params:oauth:grant-profile:kyapay in its
+   authorization_grant_profiles_supported metadata parameter
+   [I-D.ietf-oauth-identity-assertion-authz-grant].  An authorization
+   server that includes this value MUST also include
+   urn:ietf:params:oauth:grant-type:token-exchange in
+   grant_types_supported.
+
+   Including this value indicates only that the authorization server
+   implements the processing rules of this specification.  It does not
+   indicate that a token from any particular KYAPay token issuer will be
+   accepted.
+
+   An authorization server MAY also include the kyapay_issuers_supported
+   metadata parameter [RFC8414].  The definition of this parameter is:
 
    kyapay_issuers_supported:
       OPTIONAL.  JSON array containing a list of issuer identifiers of
@@ -338,11 +354,24 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
       is used.  In some use cases, the set of token issuers will not be
       enumerable.  The array MAY be empty.
 
-   An authorization server that includes this parameter MUST also
-   include urn:ietf:params:oauth:grant-type:token-exchange in
-   grant_types_supported.
+   An authorization server that includes kyapay_issuers_supported MUST
+   also include urn:ietf:params:oauth:grant-profile:kyapay in
+   authorization_grant_profiles_supported.
 
-7.  KYAPay Token Example
+7.  Client Metadata
+
+   A client can declare support for KYAPay token exchange by including
+   the value urn:ietf:params:oauth:grant-profile:kyapay in its
+   authorization_grant_profiles_supported client metadata parameter
+   [I-D.ietf-oauth-identity-assertion-authz-grant], for example, in its
+   Client ID Metadata Document.  A client that includes this value MUST
+   also include urn:ietf:params:oauth:grant-type:token-exchange in its
+   grant_types.
+
+   Clients using the direct method have no client metadata, so this
+   applies only to clients that publish or register metadata.
+
+8.  KYAPay Token Example
 
    An example decoded set of JWT Header Parameters for a KYAPay token
    is:
@@ -390,13 +419,13 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
    The KYAPay token is used as the subject_token value for the token
    exchange.
 
-8.  Security Considerations
+9.  Security Considerations
 
    The security considerations defined in
    [I-D.skyfire-oauth-kyapay-token] and [RFC8693] apply to this
    specification.
 
-9.  Privacy Considerations
+10.  Privacy Considerations
 
    The privacy considerations defined in
    [I-D.skyfire-oauth-kyapay-token] and [RFC8693] apply to this
@@ -407,16 +436,18 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
    know, before making a request, whether a KYAPay token they hold or
    can obtain will be accepted.  Deployments that consider their issuer
    relationships sensitive should take this into account before
-   publishing the list.
+   publishing the list.  As in Section 9.4 of
+   [I-D.ietf-oauth-identity-assertion-authz-grant], issuer lists are not
+   conveyed in authorization_grant_profiles_supported.
 
-10.  IANA Considerations
+11.  IANA Considerations
 
-10.1.  OAuth URI Registration
+11.1.  OAuth URI Registration
 
-   This specification registers the following value in the IANA "OAuth
+   This specification registers the following values in the IANA "OAuth
    URI" registry [IANA.OAuth.Parameters] established by [RFC6755].
 
-10.1.1.  urn:ietf:params:oauth:token-type:kyapay
+11.1.1.  urn:ietf:params:oauth:token-type:kyapay
 
    *  URN: urn:ietf:params:oauth:token-type:kyapay
 
@@ -426,13 +457,24 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
 
    *  Specification Document: Section 3 of this specification
 
-10.2.  OAuth Authorization Server Metadata Registration
+11.1.2.  urn:ietf:params:oauth:grant-profile:kyapay
+
+   *  URN: urn:ietf:params:oauth:grant-profile:kyapay
+
+   *  Common Name: Authorization grant profile identifier for KYAPay
+      Token Exchange
+
+   *  Change controller: IETF
+
+   *  Specification Document: Section 6 of this specification
+
+11.2.  OAuth Authorization Server Metadata Registration
 
    This specification registers the following parameter in the IANA
    "OAuth Authorization Server Metadata" registry
    [IANA.OAuth.Parameters] established by [RFC8414].
 
-10.2.1.  kyapay_issuers_supported
+11.2.1.  kyapay_issuers_supported
 
    *  Metadata Name: kyapay_issuers_supported
 
@@ -444,9 +486,9 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
 
    *  Specification Document(s): Section 6 of this specification
 
-11.  References
+12.  References
 
-11.1.  Normative References
+12.1.  Normative References
 
    [I-D.ietf-oauth-client-id-metadata-document]
               Parecki, A. and E. Smith, "OAuth Client ID Metadata
@@ -454,6 +496,14 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
               oauth-client-id-metadata-document-02, 6 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
               client-id-metadata-document-02>.
+
+   [I-D.ietf-oauth-identity-assertion-authz-grant]
+              Parecki, A., McGuinness, K., and B. Campbell, "Identity
+              Assertion JWT Authorization Grant", Work in Progress,
+              Internet-Draft, draft-ietf-oauth-identity-assertion-authz-
+              grant-04, 21 May 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-oauth-
+              identity-assertion-authz-grant-04>.
 
    [I-D.skyfire-oauth-kyapay-token]
               Agarwal, A. and M. B. Jones, "KYAPay Token", Work in
@@ -490,7 +540,7 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
               DOI 10.17487/RFC9728, April 2025,
               <https://www.rfc-editor.org/rfc/rfc9728>.
 
-11.2.  Informative References
+12.2.  Informative References
 
    [IANA.OAuth.Parameters]
               IANA, "OAuth Parameters",
@@ -557,11 +607,14 @@ Document History
       exchange of a KYAPay token for an access token and token exchange
       for a client using CIMD are defined.
 
-   *  Defined the kyapay_issuers_supported authorization server metadata
-      parameter.
+   *  Defined the urn:ietf:params:oauth:grant-profile:kyapay
+      authorization grant profile for authorization server and client
+      metadata, and the optional kyapay_issuers_supported authorization
+      server metadata parameter.
 
-   *  Registered the urn:ietf:params:oauth:token-type:kyapay token type
-      and the kyapay_issuers_supported metadata parameter.
+   *  Registered the urn:ietf:params:oauth:token-type:kyapay token type,
+      the urn:ietf:params:oauth:grant-profile:kyapay grant profile, and
+      the kyapay_issuers_supported metadata parameter.
 
    -01
 
