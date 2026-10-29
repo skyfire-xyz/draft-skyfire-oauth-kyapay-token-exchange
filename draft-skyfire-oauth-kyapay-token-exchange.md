@@ -60,6 +60,7 @@ normative:
   RFC9728:
   I-D.skyfire-oauth-kyapay-token:
   I-D.ietf-oauth-client-id-metadata-document:
+  I-D.ietf-oauth-identity-assertion-authz-grant:
 
 informative:
   RFC6749:
@@ -190,9 +191,11 @@ This specification defines two methods of exchanging KYAPay tokens for access to
 a direct method and
 a method using a
 Client ID Metadata Document (CIMD) {{I-D.ietf-oauth-client-id-metadata-document}}.
-It also defines an OAuth authorization server metadata parameter
-enabling authorization servers
-to declare that KYAPay Token Exchange is supported.
+It also defines an authorization grant profile identifier,
+which authorization servers and clients use
+to declare that they support KYAPay Token Exchange,
+and an optional authorization server metadata parameter
+listing supported KYAPay token issuers.
 
 The steps when successfully exchanging a KYAPay token for an access token
 and using it with the protected resource are:
@@ -341,8 +344,20 @@ to perform a KYAPay token exchange for an access token:
 
 # Authorization Server Metadata {#as-metadata}
 
-An authorization server declares support for KYAPay token exchange by including a
-`kyapay_issuers_supported` authorization server metadata parameter {{RFC8414}}.
+An authorization server declares support for KYAPay token exchange by including the value
+`urn:ietf:params:oauth:grant-profile:kyapay`
+in its `authorization_grant_profiles_supported` metadata parameter
+{{I-D.ietf-oauth-identity-assertion-authz-grant}}.
+An authorization server that includes this value MUST also include
+`urn:ietf:params:oauth:grant-type:token-exchange` in `grant_types_supported`.
+
+Including this value indicates only that the authorization server
+implements the processing rules of this specification.
+It does not indicate that a token from any particular KYAPay token issuer
+will be accepted.
+
+An authorization server MAY also include the
+`kyapay_issuers_supported` metadata parameter {{RFC8414}}.
 The definition of this parameter is:
 
 {:vspace}
@@ -356,8 +371,22 @@ The definition of this parameter is:
   In some use cases, the set of token issuers will not be enumerable.
   The array MAY be empty.
 
-An authorization server that includes this parameter MUST also include
-`urn:ietf:params:oauth:grant-type:token-exchange` in `grant_types_supported`.
+An authorization server that includes `kyapay_issuers_supported` MUST also include
+`urn:ietf:params:oauth:grant-profile:kyapay` in `authorization_grant_profiles_supported`.
+
+
+# Client Metadata {#client-metadata}
+
+A client can declare support for KYAPay token exchange by including the value
+`urn:ietf:params:oauth:grant-profile:kyapay`
+in its `authorization_grant_profiles_supported` client metadata parameter
+{{I-D.ietf-oauth-identity-assertion-authz-grant}},
+for example, in its Client ID Metadata Document.
+A client that includes this value MUST also include
+`urn:ietf:params:oauth:grant-type:token-exchange` in its `grant_types`.
+
+Clients using the direct method have no client metadata,
+so this applies only to clients that publish or register metadata.
 
 
 # KYAPay Token Example
@@ -424,13 +453,15 @@ Clients may need to know, before making a request,
 whether a KYAPay token they hold or can obtain will be accepted.
 Deployments that consider their issuer relationships sensitive
 should take this into account before publishing the list.
+As in {{Section 9.4 of I-D.ietf-oauth-identity-assertion-authz-grant}},
+issuer lists are not conveyed in `authorization_grant_profiles_supported`.
 
 
 # IANA Considerations
 
 ## OAuth URI Registration
 
-This specification registers the following value in the
+This specification registers the following values in the
 IANA "OAuth URI" registry {{IANA.OAuth.Parameters}}
 established by {{RFC6755}}.
 
@@ -440,6 +471,13 @@ established by {{RFC6755}}.
 * Common Name: KYAPay Token Type
 * Change controller: IETF
 * Specification Document: {{kyapay-token-exchange}} of this specification
+
+### urn:ietf:params:oauth:grant-profile:kyapay
+
+* URN: urn:ietf:params:oauth:grant-profile:kyapay
+* Common Name: Authorization grant profile identifier for KYAPay Token Exchange
+* Change controller: IETF
+* Specification Document: {{as-metadata}} of this specification
 
 
 ## OAuth Authorization Server Metadata Registration
@@ -470,8 +508,11 @@ established by {{RFC8414}}.
 * Reworked to use OAuth 2.0 Token Exchange {{RFC8693}}.
   Both direct exchange of a KYAPay token for an access token
   and token exchange for a client using CIMD are defined.
-* Defined the `kyapay_issuers_supported` authorization server metadata parameter.
-* Registered the `urn:ietf:params:oauth:token-type:kyapay` token type
+* Defined the `urn:ietf:params:oauth:grant-profile:kyapay` authorization grant profile
+  for authorization server and client metadata,
+  and the optional `kyapay_issuers_supported` authorization server metadata parameter.
+* Registered the `urn:ietf:params:oauth:token-type:kyapay` token type,
+  the `urn:ietf:params:oauth:grant-profile:kyapay` grant profile,
   and the `kyapay_issuers_supported` metadata parameter.
 
 -01
