@@ -305,7 +305,7 @@ This section describes a KYAPay token exchange method using a
 Client ID Metadata Document (CIMD) {{I-D.ietf-oauth-client-id-metadata-document}}.
 This method uses the CIMD URL as the Client ID.
 
-As described in {{Section 8.2 of I-D.ietf-oauth-client-id-metadata-document}}
+As described in {{Section 5 of I-D.ietf-oauth-client-id-metadata-document}}
 (Client Authentication),
 clients that are capable of maintaining private key material and
 performing client authentication SHOULD do so with an acceptable
@@ -502,6 +502,10 @@ established by {{RFC8414}}.
 {: numbered="false"}
 
 [[ to be removed by the RFC Editor before publication as an RFC ]]
+
+-03
+
+* Updated the Client ID Metadata Document section reference for -03.
 
 -02
 
