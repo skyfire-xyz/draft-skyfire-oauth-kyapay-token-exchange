@@ -408,6 +408,7 @@ An example decoded JWT Claims Set for a KYAPay token is:
       "tsi": "886eef79-4d90-4b8d-81f0-ce5c6c7dac13",
       "tdm": "auth101.dev",
       "hid": {
+	"id": "ed0f64ef-3c7b-4df2-8d91-db3c4fb8c80b",
 	"email": "example@skyfire.xyz",
 	"verifier": "https://app.skyfire.xyz",
 	"verified": true
@@ -506,6 +507,7 @@ established by {{RFC8414}}.
 -03
 
 * Updated the Client ID Metadata Document section reference for -03.
+* Added the required `hid.id` sub-claim to the example KYAPay token.
 
 -02
 
