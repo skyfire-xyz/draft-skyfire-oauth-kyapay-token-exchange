@@ -248,8 +248,8 @@ Specifically, it is the string concatenation of
 - the string literal "|", and
 - the `aid` claim's `id` value.
 
-If the KYAPay token has no `ori` claim, or no `apd` claim,
-the corresponding part is the empty string,
+If the KYAPay token has no `ori` claim,
+that part is the empty string,
 so the Client ID always has four parts separated by "|".
 
 An example such Client ID value is:
@@ -508,6 +508,7 @@ established by {{RFC8414}}.
 
 * Updated the Client ID Metadata Document section reference for -03.
 * Added the required `hid.id` sub-claim to the example KYAPay token.
+* Removed the case of a KYAPay token with no `apd` claim from the direct method's Client ID, since `apd` is REQUIRED in KYA and KYA-PAY tokens.
 
 -02
 
