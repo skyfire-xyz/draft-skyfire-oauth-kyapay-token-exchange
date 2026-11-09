@@ -248,8 +248,8 @@ Specifically, it is the string concatenation of
 - the string literal "|", and
 - the `aid` claim's `id` value.
 
-If the KYAPay token has no `ori` claim, or no `apd` claim,
-the corresponding part is the empty string,
+If the KYAPay token has no `ori` claim,
+that part is the empty string,
 so the Client ID always has four parts separated by "|".
 
 An example such Client ID value is:
@@ -408,6 +408,7 @@ An example decoded JWT Claims Set for a KYAPay token is:
       "tsi": "886eef79-4d90-4b8d-81f0-ce5c6c7dac13",
       "tdm": "auth101.dev",
       "hid": {
+	"id": "ed0f64ef-3c7b-4df2-8d91-db3c4fb8c80b",
 	"email": "example@skyfire.xyz",
 	"verifier": "https://app.skyfire.xyz",
 	"verified": true
@@ -506,6 +507,8 @@ established by {{RFC8414}}.
 -03
 
 * Updated the Client ID Metadata Document section reference for -03.
+* Added the required `hid.id` sub-claim to the example KYAPay token.
+* Removed the case of a KYAPay token with no `apd` claim from the direct method's Client ID, since `apd` is REQUIRED in KYA and KYA-PAY tokens.
 
 -02
 
