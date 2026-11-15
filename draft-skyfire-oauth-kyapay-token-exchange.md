@@ -69,6 +69,7 @@ informative:
   RFC7523:
   RFC7591:
   RFC9449:
+  RFC10070:
   MCP:
     target: https://modelcontextprotocol.io/specification/2026-07-28
     title: Model Context Protocol Specification
@@ -309,7 +310,8 @@ As described in {{Section 5 of I-D.ietf-oauth-client-id-metadata-document}}
 (Client Authentication),
 clients that are capable of maintaining private key material and
 performing client authentication SHOULD do so with an acceptable
-method, such as the private_key_jwt {{OpenID.Core}} {{RFC7523}} client authentication method.
+method, such as the private_key_jwt {{OpenID.Core}} {{RFC7523}} client authentication method,
+as updated by {{RFC10070}}.
 Otherwise, the "none" client authentication method {{RFC7591}} is used,
 and the `client_id` parameter is the CIMD URL.
 
@@ -509,6 +511,7 @@ established by {{RFC8414}}.
 * Updated the Client ID Metadata Document section reference for -03.
 * Added the required `hid.id` sub-claim to the example KYAPay token.
 * Removed the case of a KYAPay token with no `apd` claim from the direct method's Client ID, since `apd` is REQUIRED in KYA and KYA-PAY tokens.
+* Cited RFC 10070, which updates the audience rules of RFC 7523 for private_key_jwt client authentication.
 
 -02
 
