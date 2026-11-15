@@ -5,12 +5,12 @@
 Web Authorization Protocol                                    A. Agarwal
 Internet-Draft                                      Skyfire Systems Inc.
 Intended status: Standards Track                                M. Jones
-Expires: 13 May 2027                              Self-Issued Consulting
+Expires: 19 May 2027                              Self-Issued Consulting
                                                             A. Hingnikar
                                                                   WorkOS
                                                               J. Hickman
                                                                      Ory
-                                                         9 November 2026
+                                                        15 November 2026
 
 
                          KYAPay Token Exchange
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 May 2027.
+   This Internet-Draft will expire on 19 May 2027.
 
 Copyright Notice
 
@@ -286,9 +286,9 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
    clients that are capable of maintaining private key material and
    performing client authentication SHOULD do so with an acceptable
    method, such as the private_key_jwt [OpenID.Core] [RFC7523] client
-   authentication method.  Otherwise, the "none" client authentication
-   method [RFC7591] is used, and the client_id parameter is the CIMD
-   URL.
+   authentication method, as updated by [RFC10070].  Otherwise, the
+   "none" client authentication method [RFC7591] is used, and the
+   client_id parameter is the CIMD URL.
 
    The token exchange uses [RFC8693] and is performed as follows:
 
@@ -597,6 +597,12 @@ grant_type=urn:ietf:params:oauth:grant-type:token-exchange
               Possession (DPoP)", RFC 9449, DOI 10.17487/RFC9449,
               September 2023, <https://www.rfc-editor.org/rfc/rfc9449>.
 
+   [RFC10070] Jones, M.B., Campbell, B., Mortimore, C., and F. Skokan,
+              "Updates to OAuth 2.0 JSON Web Token (JWT) Client
+              Authentication and Assertion-Based Authorization Grants",
+              RFC 10070, DOI 10.17487/RFC10070, November 2026,
+              <https://www.rfc-editor.org/rfc/rfc10070>.
+
 Document History
 
    [[ to be removed by the RFC Editor before publication as an RFC ]]
@@ -610,6 +616,9 @@ Document History
    *  Removed the case of a KYAPay token with no apd claim from the
       direct method's Client ID, since apd is REQUIRED in KYA and KYA-
       PAY tokens.
+
+   *  Cited RFC 10070, which updates the audience rules of RFC 7523 for
+      private_key_jwt client authentication.
 
    -02
 
